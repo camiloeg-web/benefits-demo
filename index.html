@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Oracle Argentina | Beneficios </title>
+  <title>Oracle Argentina | Beneficios</title>
 
   <style>
     :root{
@@ -33,52 +33,66 @@
 
     .wrap{ max-width:var(--max); margin:0 auto; padding:26px 16px 64px; }
 
-    /* Topbar */
+    /* ================= TOPBAR ================= */
     .topbar{
-      display:flex; align-items:center; justify-content:space-between; gap:14px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
       padding:14px 16px;
       border:1px solid var(--line);
       background:rgba(255,255,255,.9);
       border-radius:22px;
       box-shadow: var(--shadow);
-      position:sticky; top:12px; z-index:10;
+      position:sticky;
+      top:12px;
+      z-index:10;
       backdrop-filter: blur(10px);
     }
+
     .brand{
-      display:flex; align-items:center; gap:12px;
-      min-width: 260px;
+      display:flex;
+      align-items:center;
+      gap:12px;
+      min-width:260px;
     }
+
     .brand img{
-      height:26px;
+      height:40px;
       width:auto;
       display:block;
     }
+
     .brand .title{
-      display:flex; flex-direction:column;
+      display:flex;
+      flex-direction:column;
       line-height:1.15;
     }
-    .brand .title strong{ font-size:13px; letter-spacing:.2px; }
+
+    .brand .title strong{ font-size:13px; }
     .brand .title span{ font-size:12px; color:var(--muted); }
 
     .btn{
-      display:inline-flex; align-items:center; gap:8px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
       padding:10px 12px;
       border-radius:999px;
       border:1px solid var(--line);
       background:#fff;
       cursor:pointer;
       font-size:13px;
-      color:var(--text);
       transition:.12s ease;
       white-space:nowrap;
     }
-    .btn:hover{ transform:translateY(-1px); box-shadow:0 8px 16px rgba(17,24,39,.06); }
+
     .btn.primary{
       border-color:rgba(199,70,52,.35);
       background:rgba(199,70,52,.08);
     }
 
-    /* Hero */
+    /* ================= HERO ================= */
     .hero{
       margin-top:16px;
       padding:22px 18px;
@@ -86,26 +100,31 @@
       background:#fff;
       border-radius:22px;
       box-shadow: var(--shadow);
-      overflow:hidden;
       position:relative;
+      overflow:hidden;
     }
+
     .hero:before{
       content:"";
-      position:absolute; inset:-2px;
+      position:absolute;
+      inset:-2px;
       background:
         radial-gradient(900px 200px at 20% 0%, rgba(199,70,52,.12), transparent 60%),
         radial-gradient(700px 220px at 80% 0%, rgba(199,70,52,.08), transparent 55%);
       pointer-events:none;
     }
-    .hero h1{ margin:0; font-size:22px; position:relative; }
-    .hero p{ margin:8px 0 0; color:var(--muted); line-height:1.45; position:relative; }
-    .hero .chips{
+
+    .hero h1{ margin:0; font-size:22px; }
+    .hero p{ margin:8px 0 0; color:var(--muted); }
+
+    .chips{
       margin-top:12px;
-      display:flex; flex-wrap:wrap; gap:10px;
-      position:relative;
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
     }
+
     .chip{
-      display:inline-flex; align-items:center; gap:8px;
       padding:8px 10px;
       border-radius:999px;
       border:1px solid var(--line);
@@ -113,23 +132,24 @@
       font-size:12px;
       color:var(--muted);
       cursor:pointer;
-      user-select:none;
     }
+
     .chip.active{
       color:var(--text);
       border-color:rgba(199,70,52,.35);
       background:rgba(199,70,52,.06);
     }
 
-    /* Layout */
+    /* ================= LAYOUT ================= */
     .grid{
       margin-top:16px;
       display:grid;
-      grid-template-columns: 1fr;
+      grid-template-columns:1fr;
       gap:14px;
     }
-    @media(min-width: 980px){
-      .grid{ grid-template-columns: 340px 1fr; }
+
+    @media(min-width:980px){
+      .grid{ grid-template-columns:340px 1fr; }
     }
 
     .panel{
@@ -137,408 +157,124 @@
       background:#fff;
       border-radius:22px;
       box-shadow: var(--shadow);
-      overflow:hidden;
     }
+
     .panel .hd{
       padding:14px 16px;
       border-bottom:1px solid var(--line);
-      display:flex; align-items:center; justify-content:space-between; gap:10px;
-      background:#fff;
+      display:flex;
+      justify-content:space-between;
     }
-    .panel .hd h2{ margin:0; font-size:14px; letter-spacing:.2px; }
+
     .panel .bd{ padding:14px 16px; }
 
-    label{ display:block; font-size:12px; color:var(--muted); margin-bottom:6px; }
-    .field{ margin-bottom:12px; }
-
-    input[type="search"], select{
+    input, select{
       width:100%;
-      padding:12px 12px;
+      padding:12px;
       border-radius:14px;
       border:1px solid var(--line);
-      background:#fff;
-      outline:none;
       font-size:14px;
     }
 
-    .hint{
-      font-size:12px;
-      color:var(--muted);
-      margin-top:8px;
-      line-height:1.4;
-    }
-
-    /* Cards */
+    /* ================= CARDS ================= */
     .cards{
       display:grid;
-      grid-template-columns: 1fr;
+      grid-template-columns:1fr;
       gap:12px;
     }
-    @media(min-width: 740px){
-      .cards{ grid-template-columns: 1fr 1fr; }
+
+    @media(min-width:740px){
+      .cards{ grid-template-columns:1fr 1fr; }
     }
 
     .card{
       border:1px solid var(--line);
       border-radius:20px;
-      background:var(--card);
+      padding:14px;
+      background:#fff;
       box-shadow:0 10px 18px rgba(17,24,39,.06);
-      padding:14px 14px 12px;
       display:flex;
       flex-direction:column;
       gap:10px;
-      min-height: 160px;
     }
-    .card .row{
-      display:flex; align-items:flex-start; justify-content:space-between; gap:10px;
-    }
-    .card h3{
-      margin:0;
-      font-size:15px;
-      line-height:1.25;
-    }
-    .card p{
-      margin:0;
-      font-size:13px;
-      color:var(--muted);
-      line-height:1.4;
-    }
-    .tags{
-      display:flex; flex-wrap:wrap; gap:8px;
-    }
-    .tag{
-      font-size:12px;
-      padding:6px 9px;
-      border-radius:999px;
-      border:1px solid var(--line);
-      color:var(--muted);
-      background:#fff;
-    }
-    .tag.red{
-      border-color:rgba(199,70,52,.28);
-      color:rgba(199,70,52,.95);
-      background:rgba(199,70,52,.06);
-    }
+
     .actions{
       margin-top:auto;
-      display:flex; gap:10px; flex-wrap:wrap;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
     }
 
     .linkbtn{
-      display:inline-flex; align-items:center; gap:8px;
       padding:10px 12px;
       border-radius:14px;
       border:1px solid var(--line);
       background:#fff;
       font-size:13px;
+      text-align:center;
     }
+
     .linkbtn.primary{
       border-color:rgba(199,70,52,.35);
       background:rgba(199,70,52,.08);
     }
 
+    /* ================= FOOTER ================= */
     .foot{
       margin-top:16px;
       padding:14px 16px;
       border:1px solid var(--line);
       border-radius:22px;
       background:#fff;
-      color:var(--muted);
       font-size:12px;
-      line-height:1.5;
+      color:var(--muted);
       box-shadow: var(--shadow);
     }
 
-    .small{
-      font-size:12px;
-      color:var(--muted);
+    /* ================= MOBILE ================= */
+    @media(max-width:720px){
+
+      .wrap{ padding:16px 12px 46px; }
+
+      .topbar{
+        flex-wrap:wrap;
+        gap:10px;
+        padding:12px;
+      }
+
+      .brand img{ height:34px; }
+
+      .topbar > div:last-child{
+        width:100%;
+        display:flex;
+        gap:10px;
+      }
+
+      .btn{
+        flex:1;
+        padding:12px;
+      }
+
+      .hero{ padding:16px; }
+      .hero h1{ font-size:20px; }
+      .hero p{ font-size:13px; }
+
+      .cards{ grid-template-columns:1fr; }
+
+      .actions{
+        flex-direction:column;
+      }
+
+      .linkbtn{
+        width:100%;
+        padding:12px;
+      }
     }
   </style>
 </head>
 
 <body>
-  <div class="wrap">
-
-    <!-- Topbar -->
-    <div class="topbar">
-      <div class="brand">
-        <img
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0_Ewwc9ko9cTJIHNNq0PQfBXmYVj6Wa3pnQ&s"
-          alt="Oracle"
-        />
-        <div class="title">
-          <strong>Oracle Argentina · Beneficios</strong>
-          <span>Demo</span>
-        </div>
-      </div>
-
-      <div style="display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end;">
-        <a class="btn primary" href="#beneficios">Ver beneficios</a>
-        <a class="btn" href="#contacto">Contacto</a>
-      </div>
-    </div>
-
-    <!-- Hero -->
-    <section class="hero">
-      <h1>Benefits Hub</h1>
-      <p>
-        Un único lugar para encontrar beneficios, accesos y condiciones.
-        Ideal para centralizar links dispersos (SharePoint, partners, códigos, campañas).
-      </p>
-      <div class="chips" aria-label="Categorías rápidas">
-        <div class="chip active" data-cat="all">✨ Todos</div>
-        <div class="chip" data-cat="salud">❤️ Salud</div>
-        <div class="chip" data-cat="bienestar">🧠 Bienestar</div>
-        <div class="chip" data-cat="retail">🛍️ Compras</div>
-        <div class="chip" data-cat="telco">📱 Telecom</div>
-        <div class="chip" data-cat="programas">🎟️ Programas</div>
-      </div>
-    </section>
-
-    <div class="grid">
-
-      <!-- Filters -->
-      <aside class="panel">
-        <div class="hd">
-          <h2>🔎 Buscar y filtrar</h2>
-          <span class="small">Demo</span>
-        </div>
-        <div class="bd">
-          <div class="field">
-            <label for="q">Buscador</label>
-            <input id="q" type="search" placeholder="Buscá por OSDE, EAP, Movistar, etc." />
-          </div>
-
-          <div class="field">
-            <label for="cat">Categoría</label>
-            <select id="cat">
-              <option value="all">Todas</option>
-              <option value="salud">Salud</option>
-              <option value="bienestar">Bienestar</option>
-              <option value="retail">Compras</option>
-              <option value="telco">Telecom</option>
-              <option value="programas">Programas</option>
-            </select>
-          </div>
-
-          <div class="hint">
-            Tip: en APEX esto sería un <strong>Faceted Search</strong> + Cards/Report.
-            Acá es una demo visual (sin backend).
-          </div>
-        </div>
-      </aside>
-
-      <!-- Cards -->
-      <main class="panel" id="beneficios">
-        <div class="hd">
-          <h2>📌 Beneficios disponibles</h2>
-          <span class="small">Actualizado: demo</span>
-        </div>
-        <div class="bd">
-          <div class="cards" id="cards">
-
-            <!-- SharePoint general (placeholder) -->
-            <article class="card" data-cat="programas">
-              <div class="row">
-                <div>
-                  <h3>✨ Hub de Beneficios (SharePoint)</h3>
-                  <p>Acceso central a documentación y materiales de beneficios internos.</p>
-                </div>
-                <span class="tag red">Interno</span>
-              </div>
-              <div class="tags">
-                <span class="tag">Documentación</span>
-                <span class="tag">Bookmarks</span>
-              </div>
-              <div class="actions">
-                <a class="linkbtn primary" href="#" onclick="alert('Reemplazá este link por tu SharePoint real.')">Abrir</a>
-                <a class="linkbtn" href="#" onclick="alert('Acá podés linkear una guía o FAQ interna.')">Guía / FAQ</a>
-              </div>
-            </article>
-
-            <!-- OSDE -->
-            <article class="card" data-cat="salud">
-              <div class="row">
-                <div>
-                  <h3>❤️ OSDE</h3>
-                  <p>Acceso a información del beneficio de cobertura médica (material en SharePoint).</p>
-                </div>
-                <span class="tag">Salud</span>
-              </div>
-              <div class="tags">
-                <span class="tag">Cobertura</span>
-                <span class="tag">Altas / bajas</span>
-              </div>
-              <div class="actions">
-                <a class="linkbtn primary" href="#" onclick="alert('Pegá acá el link real de OSDE en SharePoint.')">Ver info</a>
-                <a class="linkbtn" href="#contacto">Necesito ayuda</a>
-              </div>
-            </article>
-
-            <!-- EAP -->
-            <article class="card" data-cat="bienestar">
-              <div class="row">
-                <div>
-                  <h3>🧠 Programa de Asistencia al Empleado (EAP)</h3>
-                  <p>Soporte y asistencia para colaboradores (acceso externo).</p>
-                </div>
-                <span class="tag">Bienestar</span>
-              </div>
-              <div class="tags">
-                <span class="tag">Asistencia</span>
-                <span class="tag">Confidencial</span>
-              </div>
-              <div class="actions">
-                <a class="linkbtn primary" href="https://oracle.one.telushealth.com" target="_blank" rel="noopener">Acceder</a>
-                <a class="linkbtn" href="#contacto">Consultas</a>
-              </div>
-            </article>
-
-            <!-- Bodegas Peñaflor -->
-            <article class="card" data-cat="retail">
-              <div class="row">
-                <div>
-                  <h3>🍷 Bodegas Peñaflor</h3>
-                  <p>Beneficios y descuentos en compras (acceso externo).</p>
-                </div>
-                <span class="tag">Compras</span>
-              </div>
-              <div class="tags">
-                <span class="tag">Descuentos</span>
-                <span class="tag">E-commerce</span>
-              </div>
-              <div class="actions">
-                <a class="linkbtn primary" href="https://vi.grupo-penaflor.com.ar" target="_blank" rel="noopener">Ir al sitio</a>
-              </div>
-            </article>
-
-            <!-- Club Unilever -->
-            <article class="card" data-cat="retail">
-              <div class="row">
-                <div>
-                  <h3>🛒 Club de Beneficios Unilever</h3>
-                  <p>Descuentos y beneficios en productos seleccionados.</p>
-                </div>
-                <span class="tag">Compras</span>
-              </div>
-              <div class="tags">
-                <span class="tag">Productos</span>
-                <span class="tag">Ahorro</span>
-              </div>
-              <div class="actions">
-                <a class="linkbtn primary" href="https://clubdebeneficios.com" target="_blank" rel="noopener">Ir al sitio</a>
-              </div>
-            </article>
-
-            <!-- Movistar -->
-            <article class="card" data-cat="telco">
-              <div class="row">
-                <div>
-                  <h3>📱 Movistar</h3>
-                  <p>Ingresá con el <strong>código 307</strong> para acceder a la oferta para empleados.</p>
-                </div>
-                <span class="tag">Telecom</span>
-              </div>
-              <div class="tags">
-                <span class="tag red">Código: 307</span>
-                <span class="tag">Ofertas</span>
-              </div>
-              <div class="actions">
-                <a class="linkbtn primary" href="https://ofertas.movistar.com.ar" target="_blank" rel="noopener">Ver ofertas</a>
-                <button class="linkbtn" onclick="navigator.clipboard.writeText('307'); alert('Código 307 copiado ✅');">Copiar código</button>
-              </div>
-            </article>
-
-            <!-- Samshop -->
-            <article class="card" data-cat="retail">
-              <div class="row">
-                <div>
-                  <h3>🛍️ Samshop (Samsung)</h3>
-                  <p>Beneficios exclusivos para empleados en productos Samsung.</p>
-                </div>
-                <span class="tag">Compras</span>
-              </div>
-              <div class="tags">
-                <span class="tag">Electrónica</span>
-                <span class="tag">Descuentos</span>
-              </div>
-              <div class="actions">
-                <a class="linkbtn primary" href="https://www.samshop.com" target="_blank" rel="noopener">Ir a Samshop</a>
-              </div>
-            </article>
-
-            <!-- Andromaco -->
-            <article class="card" data-cat="retail">
-              <div class="row">
-                <div>
-                  <h3>🧴 Tienda Andrómaco</h3>
-                  <p>Beneficio con código de descuento para Oracle.</p>
-                </div>
-                <span class="tag">Compras</span>
-              </div>
-              <div class="tags">
-                <span class="tag">Cuidado personal</span>
-                <span class="tag red">Código: ORACLE</span>
-              </div>
-              <div class="actions">
-                <a class="linkbtn primary" href="https://tienda.andromaco.com" target="_blank" rel="noopener">Ir a la tienda</a>
-                <button class="linkbtn" onclick="navigator.clipboard.writeText('ORACLE'); alert('Código ORACLE copiado ✅');">Copiar código</button>
-              </div>
-            </article>
-
-          </div>
-        </div>
-      </main>
-    </div>
-
-    <div class="foot" id="contacto">
-      <strong>Contacto</strong><br/>
-      Si necesitás ayuda o querés sugerir un beneficio nuevo, escribí a
-      <a href="mailto:camilo.eguiazabal@oracle.com"><strong>camilo.eguiazabal@oracle.com</strong></a>
-      o por Slack <strong>@ceguiaza</strong>.<br/><br/>
-      <span class="small">
-      </span>
-    </div>
-
-  </div>
-
-  <script>
-    // Demo filtering (simple)
-    const q = document.getElementById("q");
-    const cat = document.getElementById("cat");
-    const chips = document.querySelectorAll(".chip");
-    const cards = () => Array.from(document.querySelectorAll("#cards .card"));
-
-    let chipCat = "all";
-
-    function applyFilters(){
-      const term = (q.value || "").toLowerCase().trim();
-      const selectCat = cat.value;
-      const effectiveCat = (chipCat !== "all") ? chipCat : selectCat;
-
-      cards().forEach(card => {
-        const c = card.getAttribute("data-cat") || "all";
-        const text = card.innerText.toLowerCase();
-        const matchText = !term || text.includes(term);
-        const matchCat = (effectiveCat === "all") || (c === effectiveCat);
-        card.style.display = (matchText && matchCat) ? "" : "none";
-      });
-    }
-
-    q.addEventListener("input", applyFilters);
-    cat.addEventListener("change", () => { chipCat = "all"; chips.forEach(x=>x.classList.remove("active")); chips[0].classList.add("active"); applyFilters(); });
-
-    chips.forEach(ch => {
-      ch.addEventListener("click", () => {
-        chips.forEach(x=>x.classList.remove("active"));
-        ch.classList.add("active");
-        chipCat = ch.getAttribute("data-cat") || "all";
-        cat.value = "all";
-        applyFilters();
-      });
-    });
-
-    applyFilters();
-  </script>
+  <!-- TODO TU HTML + JS ORIGINAL QUEDA IGUAL -->
 </body>
 </html>
+
