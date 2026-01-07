@@ -7,265 +7,314 @@
 
   <style>
     :root{
-      /* Soft/Wow palette */
-      --berry:#7B2D6D;
-      --rose:#FDECEF;
-      --rose2:#FFF5F7;
-      --pink:#F7B6C8;
-      --peach:#FFD6C9;
+      /* Oracle-like palette */
+      --oracle-red:#C74634;
+      --oracle-red-dark:#B33D2E;
 
-      --text:#111827;
-      --muted:#6b7280;
+      --carbon:#2B2B2B;
+      --carbon-2:#1F1F1F;
 
-      --card:rgba(255,255,255,.86);
-      --shadow: 0 14px 34px rgba(17,24,39,.12);
-      --shadow2: 0 10px 18px rgba(17,24,39,.08);
+      --ink:#0B0B0B;
+      --muted:#5B5B5B;
 
-      --radius: 18px;
-      --max: 1180px;
-      --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      --bg:#F5F5F5;
+      --card:#FFFFFF;
+      --line:#E6E6E6;
+
+      --shadow: 0 10px 22px rgba(0,0,0,.08);
+
+      --max:1180px;
+
+      /* Font strategy:
+         If Oracle corporate fonts exist in the environment, they will render.
+         Otherwise, close fallbacks are used (legal + safe).
+      */
+      --oracle-sans: "Oracle Sans", "OracleSans", "Oracle Sans UI", "Oracle Sans UI Text",
+                     "Helvetica Neue", Helvetica, Arial, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+      --oracle-serif: "Oracle Serif", "OracleSerif", "Oracle Serif Display",
+                      "Georgia", "Times New Roman", Times, serif;
     }
 
     *{ box-sizing:border-box; }
-    html, body{ height:100%; }
+    html,body{ height:100%; }
     body{
       margin:0;
-      font-family:var(--font);
-      color:var(--text);
-      background:
-        radial-gradient(900px 520px at 10% -10%, rgba(247,182,200,.45), transparent 60%),
-        radial-gradient(820px 520px at 95% -10%, rgba(255,214,201,.45), transparent 55%),
-        radial-gradient(900px 600px at 50% 120%, rgba(123,45,109,.10), transparent 65%),
-        linear-gradient(180deg, var(--rose2) 0%, #f6f7fb 55%, #f6f7f9 100%);
+      font-family: var(--oracle-sans);
+      color: var(--ink);
+      background: var(--bg);
     }
 
     a{ color:inherit; text-decoration:none; }
     a:hover{ text-decoration:underline; }
 
-    .wrap{ max-width:var(--max); margin:0 auto; padding:26px 16px 64px; }
-
-    /* ===== Topbar (glass) ===== */
-    .topbar{
-      display:flex; align-items:center; justify-content:space-between; gap:14px;
-      padding:14px 16px;
-      border:1px solid rgba(255,255,255,.65);
-      background:rgba(255,255,255,.55);
-      border-radius:22px;
-      box-shadow: var(--shadow);
-      position:sticky; top:12px; z-index:10;
-      backdrop-filter: blur(14px);
-      overflow:hidden;
+    /* ===== Oracle-like top header ===== */
+    header{
+      position:sticky;
+      top:0;
+      z-index:50;
+      background: var(--carbon);
+      color:#fff;
+      border-bottom:1px solid rgba(255,255,255,.08);
     }
 
-    /* subtle shimmer line */
-    .topbar:before{
-      content:"";
-      position:absolute;
-      inset:-40px -40px auto -40px;
-      height:90px;
-      background: linear-gradient(90deg, transparent, rgba(247,182,200,.35), rgba(255,214,201,.35), transparent);
-      transform: rotate(-4deg);
-      pointer-events:none;
-      opacity:.8;
+    .top{
+      max-width: var(--max);
+      margin:0 auto;
+      padding: 14px 16px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
     }
 
     .brand{
-      display:flex; align-items:center; gap:12px;
-      min-width: 260px;
-      position:relative;
-      z-index:1;
-    }
-
-    /* Logo container (FIX + WOW) */
-    .logo-wrap{
-      width: 92px;
-      height: 42px;
       display:flex;
       align-items:center;
-      justify-content:center;
-      border-radius: 16px;
-
-      background: rgba(255,255,255,.78);
-      border: 1px solid rgba(123,45,109,.14);
-      box-shadow: 0 12px 18px rgba(17,24,39,.10);
-      position:relative;
-      overflow:hidden;
-    }
-    .logo-wrap:before{
-      content:"";
-      position:absolute; inset:-2px;
-      background:
-        radial-gradient(160px 80px at 20% 20%, rgba(247,182,200,.55), transparent 60%),
-        radial-gradient(160px 80px at 80% 20%, rgba(255,214,201,.55), transparent 60%);
-      opacity:.9;
-      pointer-events:none;
+      gap:14px;
+      min-width: 260px;
     }
     .oracle-logo{
-      width: 72px;
-      height: auto;
+      height: 26px;
+      width:auto;
       display:block;
-      position:relative;
-      z-index:1;
-      filter: drop-shadow(0 6px 14px rgba(17,24,39,.10));
     }
-
-    .brand .title{
-      display:flex; flex-direction:column;
+    .brand-meta{
+      display:flex;
+      flex-direction:column;
       line-height:1.12;
     }
-    .brand .title strong{
+    .brand-meta strong{
       font-size:13px;
+      font-weight:700;
       letter-spacing:.2px;
     }
-    .brand .title span{
+    .brand-meta span{
       font-size:12px;
-      color:var(--muted);
+      color: rgba(255,255,255,.72);
+    }
+
+    nav{
+      display:flex;
+      gap:18px;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+    nav a{
+      font-size:14px;
+      color: rgba(255,255,255,.92);
+      padding:6px 2px;
+      border-bottom:2px solid transparent;
+      text-decoration:none;
+    }
+    nav a:hover{
+      text-decoration:none;
+      border-bottom-color: rgba(199,70,52,.95);
+    }
+
+    .actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+      align-items:center;
     }
 
     .btn{
-      display:inline-flex; align-items:center; justify-content:center; gap:8px;
-      padding:10px 12px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,.7);
-      background:rgba(255,255,255,.7);
-      cursor:pointer;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      padding: 10px 14px;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,.22);
+      background: rgba(255,255,255,.06);
+      color:#fff;
       font-size:13px;
-      color:var(--text);
-      transition: transform .12s ease, box-shadow .12s ease, background .12s ease, border-color .12s ease;
+      cursor:pointer;
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
       white-space:nowrap;
-      position:relative;
-      z-index:1;
     }
-    .btn:hover{ transform:translateY(-1px); box-shadow:0 12px 18px rgba(17,24,39,.10); }
-
+    .btn:hover{ transform: translateY(-1px); background: rgba(255,255,255,.12); }
     .btn.primary{
-      border-color: rgba(123,45,109,.20);
-      background: linear-gradient(180deg, rgba(123,45,109,.14), rgba(247,182,200,.22));
-      color: #2a1030;
+      background: var(--oracle-red);
+      border-color: var(--oracle-red);
+    }
+    .btn.primary:hover{
+      background: var(--oracle-red-dark);
+      border-color: var(--oracle-red-dark);
     }
 
-    /* ===== Hero ===== */
+    /* ===== Page container ===== */
+    .wrap{
+      max-width: var(--max);
+      margin:0 auto;
+      padding: 20px 16px 56px;
+    }
+
+    /* ===== Hero (oracle.com vibe) ===== */
     .hero{
-      margin-top:16px;
-      padding:22px 18px;
-      border:1px solid rgba(255,255,255,.65);
-      background: linear-gradient(180deg, rgba(255,255,255,.88) 0%, rgba(253,236,239,.76) 60%, rgba(255,255,255,.84) 100%);
-      border-radius:22px;
-      box-shadow: var(--shadow);
+      background: #fff;
+      border:1px solid var(--line);
+      border-radius: 18px;
       overflow:hidden;
-      position:relative;
+      box-shadow: var(--shadow);
+      display:grid;
+      grid-template-columns: 1fr;
     }
-    .hero:before{
-      content:"";
-      position:absolute; inset:-2px;
-      background:
-        radial-gradient(920px 260px at 18% 0%, rgba(247,182,200,.55), transparent 62%),
-        radial-gradient(800px 280px at 85% 0%, rgba(255,214,201,.55), transparent 60%),
-        radial-gradient(900px 360px at 50% 120%, rgba(123,45,109,.10), transparent 65%);
-      pointer-events:none;
+    @media(min-width: 980px){
+      .hero{ grid-template-columns: 1.15fr .85fr; }
     }
 
-    /* hero glow blob */
-    .hero:after{
-      content:"";
-      position:absolute;
-      width: 280px;
-      height: 280px;
-      right: -110px;
-      top: -110px;
-      background: radial-gradient(circle at 30% 30%, rgba(247,182,200,.70), transparent 60%);
-      filter: blur(2px);
-      opacity:.75;
-      pointer-events:none;
+    .hero-left{
+      padding: 26px 22px 22px;
+      position:relative;
+      background:
+        linear-gradient(135deg, rgba(199,70,52,.10), transparent 55%),
+        linear-gradient(180deg, #fff, #fff);
+    }
+
+    .kicker{
+      font-size:12px;
+      font-weight:700;
+      letter-spacing:.12em;
+      text-transform: uppercase;
+      color: var(--oracle-red);
     }
 
     .hero h1{
-      margin:0;
-      font-size:28px;
-      position:relative;
-      letter-spacing:-.6px;
+      margin: 10px 0 0;
+      font-family: var(--oracle-serif);
+      font-weight: 500;
+      font-size: 34px;
+      line-height:1.12;
+      letter-spacing:-.2px;
+      color:#111;
     }
-    .hero h1 .grad{
-      background: linear-gradient(90deg, #1f2937, #2a1030, rgba(123,45,109,.95));
-      -webkit-background-clip:text;
-      background-clip:text;
-      color:transparent;
-    }
+
     .hero p{
-      margin:10px 0 0;
-      color:rgba(75,85,99,.98);
-      line-height:1.55;
-      position:relative;
+      margin: 12px 0 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height:1.6;
       max-width: 72ch;
     }
 
-    .chips{
-      margin-top:14px;
-      display:flex; flex-wrap:wrap; gap:10px;
-      position:relative;
+    .hero-right{
+      padding: 20px 22px;
+      background: #FAFAFA;
+      border-top:1px solid var(--line);
+    }
+    @media(min-width:980px){
+      .hero-right{ border-top:none; border-left:1px solid var(--line); }
     }
 
-    .chip{
-      display:inline-flex; align-items:center; gap:8px;
-      padding:8px 11px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,.70);
-      background: rgba(255,255,255,.70);
-      font-size:12px;
-      color:rgba(75,85,99,.96);
+    .quick{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+    .quick h3{
+      margin:0;
+      font-size:14px;
+      font-weight:700;
+      color:#111;
+      letter-spacing:.2px;
+    }
+    .quick p{
+      margin:0;
+      font-size:13px;
+      color: var(--muted);
+      line-height:1.5;
+    }
+    .quick .row{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:6px;
+    }
+    .cta{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      padding: 10px 14px;
+      border-radius: 10px;
+      border:1px solid var(--line);
+      background:#fff;
+      font-size:13px;
       cursor:pointer;
-      user-select:none;
-      transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease, background .12s ease;
+      transition: transform .12s ease, border-color .12s ease, background .12s ease;
+      white-space:nowrap;
     }
-    .chip:hover{
-      transform: translateY(-1px);
-      box-shadow: 0 12px 16px rgba(17,24,39,.08);
+    .cta:hover{ transform:translateY(-1px); border-color:#D6D6D6; background:#FCFCFC; }
+    .cta.primary{
+      border-color: var(--oracle-red);
+      background: var(--oracle-red);
+      color:#fff;
     }
+    .cta.primary:hover{ background: var(--oracle-red-dark); border-color: var(--oracle-red-dark); }
+
+    .chips{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:16px;
+    }
+    .chip{
+      appearance:none;
+      border:1px solid var(--line);
+      background:#fff;
+      color:#111;
+      padding:8px 12px;
+      border-radius:999px;
+      font-size:13px;
+      cursor:pointer;
+      transition: transform .12s ease, border-color .12s ease, background .12s ease;
+    }
+    .chip:hover{ transform:translateY(-1px); border-color:#D6D6D6; }
     .chip.active{
-      color:#2a1030;
-      border-color: rgba(123,45,109,.22);
-      background: linear-gradient(180deg, rgba(123,45,109,.14), rgba(247,182,200,.22));
+      border-color: var(--oracle-red);
+      background: rgba(199,70,52,.10);
+    }
+    .chip:focus{
+      outline:none;
+      box-shadow:0 0 0 4px rgba(199,70,52,.16);
     }
 
     /* ===== Layout ===== */
     .grid{
-      margin-top:16px;
+      margin-top: 16px;
       display:grid;
       grid-template-columns: 1fr;
       gap:14px;
     }
-    @media(min-width: 980px){
+    @media(min-width:980px){
       .grid{ grid-template-columns: 340px 1fr; }
     }
 
     .panel{
-      border:1px solid rgba(255,255,255,.65);
-      background: rgba(255,255,255,.70);
-      border-radius:22px;
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius: 18px;
       box-shadow: var(--shadow);
       overflow:hidden;
-      backdrop-filter: blur(10px);
-      position:relative;
     }
-    /* subtle inner border */
-    .panel:before{
-      content:"";
-      position:absolute; inset:0;
-      border-radius:22px;
-      border:1px solid rgba(123,45,109,.06);
-      pointer-events:none;
-    }
-
     .panel .hd{
-      padding:14px 16px;
-      border-bottom:1px solid rgba(255,255,255,.65);
-      display:flex; align-items:center; justify-content:space-between; gap:10px;
-      background: linear-gradient(180deg, rgba(255,255,255,.78), rgba(255,255,255,.55));
-      position:relative;
-      z-index:1;
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--line);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
     }
-    .panel .hd h2{ margin:0; font-size:14px; letter-spacing:.2px; }
-    .panel .bd{ padding:14px 16px; position:relative; z-index:1; }
+    .panel .hd h2{
+      margin:0;
+      font-size:14px;
+      font-weight:700;
+      letter-spacing:.2px;
+    }
+    .panel .bd{ padding: 14px 16px; }
 
     label{ display:block; font-size:12px; color:var(--muted); margin-bottom:6px; }
     .field{ margin-bottom:12px; }
@@ -273,24 +322,22 @@
     input[type="search"], select{
       width:100%;
       padding:12px 12px;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,.75);
-      background:rgba(255,255,255,.82);
+      border-radius: 12px;
+      border:1px solid var(--line);
       outline:none;
       font-size:14px;
-      transition: box-shadow .12s ease, border-color .12s ease, background .12s ease;
+      background:#fff;
+      transition: box-shadow .12s ease, border-color .12s ease;
     }
     input[type="search"]:focus, select:focus{
-      border-color: rgba(123,45,109,.22);
-      box-shadow: 0 0 0 6px rgba(247,182,200,.22);
-      background: rgba(255,255,255,.94);
+      border-color: rgba(199,70,52,.7);
+      box-shadow: 0 0 0 4px rgba(199,70,52,.15);
     }
-
     .hint{
       font-size:12px;
-      color:rgba(107,114,128,.98);
-      margin-top:8px;
+      color: var(--muted);
       line-height:1.45;
+      margin-top: 8px;
     }
 
     /* ===== Cards ===== */
@@ -299,280 +346,226 @@
       grid-template-columns: 1fr;
       gap:12px;
     }
-    @media(min-width: 740px){
+    @media(min-width:760px){
       .cards{ grid-template-columns: 1fr 1fr; }
     }
 
     .card{
-      position:relative;
-      border:1px solid rgba(255,255,255,.7);
-      border-radius:20px;
-      background: var(--card);
-      box-shadow: var(--shadow2);
+      border:1px solid var(--line);
+      border-radius: 16px;
+      background:#fff;
+      box-shadow: 0 8px 16px rgba(0,0,0,.06);
       padding:14px 14px 12px;
       display:flex;
       flex-direction:column;
       gap:10px;
-      min-height: 160px;
-      overflow:hidden;
+      min-height: 170px;
       transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease;
-      backdrop-filter: blur(10px);
     }
     .card:hover{
       transform: translateY(-2px);
-      box-shadow: 0 18px 30px rgba(17,24,39,.12);
-      border-color: rgba(123,45,109,.18);
-    }
-
-    /* category ribbon */
-    .card:before{
-      content:"";
-      position:absolute;
-      left:0; top:0;
-      width:100%;
-      height:7px;
-      background: linear-gradient(90deg, rgba(247,182,200,.95), rgba(255,214,201,.95));
-    }
-    .card[data-cat="salud"]:before{
-      background: linear-gradient(90deg, rgba(255,99,132,.55), rgba(255,214,201,.90));
-    }
-    .card[data-cat="bienestar"]:before{
-      background: linear-gradient(90deg, rgba(147,197,253,.55), rgba(247,182,200,.85));
-    }
-    .card[data-cat="retail"]:before{
-      background: linear-gradient(90deg, rgba(167,243,208,.60), rgba(255,214,201,.90));
-    }
-    .card[data-cat="telefonía"]:before{
-      background: linear-gradient(90deg, rgba(196,181,253,.65), rgba(247,182,200,.85));
-    }
-    .card[data-cat="programas"]:before{
-      background: linear-gradient(90deg, rgba(251,191,36,.65), rgba(255,214,201,.90));
+      box-shadow: 0 14px 26px rgba(0,0,0,.10);
+      border-color:#DADADA;
     }
 
     .card .row{
-      display:flex; align-items:flex-start; justify-content:space-between; gap:10px;
-      padding-top:2px;
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:10px;
     }
     .card h3{
       margin:0;
       font-size:15px;
+      font-weight:700;
       line-height:1.25;
-      letter-spacing:-.1px;
     }
     .card p{
       margin:0;
       font-size:13px;
-      color:rgba(107,114,128,.98);
-      line-height:1.48;
-    }
-
-    .tags{
-      display:flex; flex-wrap:wrap; gap:8px;
-    }
-    .tag{
-      font-size:12px;
-      padding:6px 9px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,.75);
-      color:rgba(107,114,128,.98);
-      background:rgba(255,255,255,.76);
-    }
-    .tag.red{
-      border-color: rgba(123,45,109,.18);
-      color: rgba(123,45,109,.95);
-      background: rgba(247,182,200,.22);
+      color: var(--muted);
+      line-height:1.5;
     }
 
     .badge{
       display:inline-flex;
       align-items:center;
-      gap:6px;
       font-size:11px;
       padding:6px 10px;
       border-radius:999px;
-      border:1px solid rgba(255,255,255,.8);
-      background:rgba(255,255,255,.78);
-      color:#2a1030;
-      box-shadow: 0 10px 14px rgba(17,24,39,.08);
+      border:1px solid var(--line);
+      background:#fff;
       white-space:nowrap;
     }
     .badge.top{
-      background: linear-gradient(180deg, rgba(255,214,201,.70), rgba(247,182,200,.40));
-      border-color: rgba(123,45,109,.18);
+      border-color: rgba(199,70,52,.35);
+      background: rgba(199,70,52,.10);
+      color: var(--oracle-red);
+      font-weight:700;
     }
     .badge.new{
-      background: linear-gradient(180deg, rgba(167,243,208,.45), rgba(255,255,255,.76));
-      border-color: rgba(16,185,129,.22);
-      color:#064e3b;
+      border-color: rgba(16,185,129,.35);
+      background: rgba(16,185,129,.10);
+      color:#065F46;
+      font-weight:700;
     }
 
-    .actions{
+    .tags{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+    }
+    .tag{
+      font-size:12px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:#FAFAFA;
+      color:#222;
+    }
+    .tag.red{
+      border-color: rgba(199,70,52,.35);
+      background: rgba(199,70,52,.10);
+      color: var(--oracle-red);
+      font-weight:700;
+    }
+
+    .actions-row{
       margin-top:auto;
-      display:flex; gap:10px; flex-wrap:wrap;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
     }
-
     .linkbtn{
-      display:inline-flex; align-items:center; justify-content:center; gap:8px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
       padding:10px 12px;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,.75);
-      background:rgba(255,255,255,.78);
+      border-radius: 12px;
+      border:1px solid var(--line);
+      background:#fff;
       font-size:13px;
       cursor:pointer;
-      transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease, background .12s ease;
+      transition: transform .12s ease, border-color .12s ease, background .12s ease;
     }
-    .linkbtn:hover{
-      transform: translateY(-1px);
-      box-shadow: 0 12px 18px rgba(17,24,39,.10);
-    }
+    .linkbtn:hover{ transform: translateY(-1px); border-color:#D6D6D6; background:#FCFCFC; }
     .linkbtn.primary{
-      border-color: rgba(123,45,109,.20);
-      background: linear-gradient(180deg, rgba(123,45,109,.14), rgba(247,182,200,.24));
-      color:#2a1030;
+      border-color: var(--oracle-red);
+      background: var(--oracle-red);
+      color:#fff;
     }
+    .linkbtn.primary:hover{ background: var(--oracle-red-dark); border-color: var(--oracle-red-dark); }
 
     .foot{
       margin-top:16px;
-      padding:14px 16px;
-      border:1px solid rgba(255,255,255,.65);
-      border-radius:22px;
-      background:rgba(255,255,255,.70);
-      color:rgba(107,114,128,.98);
+      padding: 14px 16px;
+      border:1px solid var(--line);
+      border-radius: 18px;
+      background:#fff;
+      box-shadow: var(--shadow);
+      color: var(--muted);
       font-size:12px;
       line-height:1.6;
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(10px);
     }
 
-    .small{
-      font-size:12px;
-      color:rgba(107,114,128,.98);
+    /* Toast */
+    #toast{
+      position:fixed;
+      left:50%;
+      bottom:18px;
+      transform:translateX(-50%);
+      padding:10px 12px;
+      border-radius:999px;
+      background:#111;
+      color:#fff;
+      border:1px solid rgba(255,255,255,.12);
+      box-shadow: 0 14px 34px rgba(0,0,0,.22);
+      font-size:13px;
+      display:none;
+      z-index:9999;
     }
 
-    /* ===== Mobile polish ===== */
-    @media (max-width: 640px){
-      .wrap{ padding:16px 12px 52px; }
-
-      .topbar{
-        top: 10px;
-        padding: 12px;
-        border-radius: 18px;
-        gap: 10px;
-        flex-wrap: wrap;
-        align-items: stretch;
-      }
-
-      .brand{
-        min-width: 0;
-        flex: 1 1 100%;
-        gap: 10px;
-      }
-
-      .logo-wrap{ width: 86px; height: 40px; border-radius: 14px; }
-      .oracle-logo{ width: 68px; }
-
-      .topbar > div:last-child{
-        width: 100%;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 10px;
-      }
-
-      .btn{
-        width: 100%;
-        justify-content: center;
-        padding: 12px 12px;
-        white-space: normal;
-      }
-
-      .hero{
-        padding: 16px 14px;
-        border-radius: 18px;
-      }
-      .hero h1{ font-size: 20px; }
-      .hero p{ font-size: 13px; }
-
-      .panel{ border-radius: 18px; }
-      .panel:before{ border-radius: 18px; }
-      .panel .hd{ padding: 12px 12px; }
-      .panel .bd{ padding: 12px 12px; }
-
-      input[type="search"], select{ font-size: 15px; }
-
-      .cards{ grid-template-columns: 1fr; }
-
-      .actions{
-        flex-direction: column;
-        gap: 10px;
-      }
-      .linkbtn{
-        width: 100%;
-        padding: 12px 12px;
-      }
-
-      .foot{ border-radius: 18px; }
-    }
-
-    @media (max-width: 380px){
-      .topbar > div:last-child{ grid-template-columns: 1fr; }
+    /* Mobile */
+    @media (max-width: 760px){
+      nav{ display:none; }
+      .hero h1{ font-size: 28px; }
+      .top{ gap:10px; }
+      .actions{ gap:8px; }
+      .btn{ padding:10px 12px; border-radius: 12px; }
     }
   </style>
 </head>
 
 <body>
-  <div class="wrap">
-
-    <!-- Topbar -->
-    <div class="topbar">
+  <header>
+    <div class="top">
       <div class="brand">
-        <div class="logo-wrap" aria-label="Oracle">
-          <img class="oracle-logo"
-               src="https://upload.wikimedia.org/wikipedia/commons/5/50/Oracle_logo.svg"
-               alt="Oracle">
-        </div>
-
-        <div class="title">
+        <img class="oracle-logo"
+             src="https://upload.wikimedia.org/wikipedia/commons/5/50/Oracle_logo.svg"
+             alt="Oracle">
+        <div class="brand-meta">
           <strong>Oracle Argentina · Beneficios</strong>
           <span>Demo</span>
         </div>
       </div>
 
-      <div style="display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end;">
+      <nav aria-label="Navegación">
+        <a href="#beneficios">Beneficios</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+
+      <div class="actions">
         <a class="btn primary" href="#beneficios">Ver beneficios</a>
         <a class="btn" href="#contacto">Contacto</a>
       </div>
     </div>
+  </header>
 
-    <!-- Hero -->
-    <section class="hero">
-      <h1><span class="grad">Your Benefits Hub</span></h1>
-      <div class="chips" aria-label="Categorías rápidas">
-        <div class="chip active" data-cat="all">✨ Todos</div>
-        <div class="chip" data-cat="salud">❤️ Salud</div>
-        <div class="chip" data-cat="bienestar">🧠 Bienestar</div>
-        <div class="chip" data-cat="retail">🛍️ Compras</div>
-        <div class="chip" data-cat="telco">📱 Movistar</div>
-        <div class="chip" data-cat="programas">🎟️ Programas</div>
+  <div class="wrap">
+    <section class="hero" aria-label="Hero">
+      <div class="hero-left">
+        <div class="kicker">ORACLE · BENEFITS HUB</div>
+        <h1>Tu Hub de Beneficios</h1>
+        <p>Encontrá beneficios internos y externos en un solo lugar. Usá el buscador o filtrá por categoría.</p>
+
+        <div class="chips" aria-label="Categorías rápidas">
+          <button class="chip active" data-cat="all" type="button" aria-pressed="true">Todos</button>
+          <button class="chip" data-cat="salud" type="button" aria-pressed="false">Salud</button>
+          <button class="chip" data-cat="bienestar" type="button" aria-pressed="false">Bienestar</button>
+          <button class="chip" data-cat="retail" type="button" aria-pressed="false">Compras</button>
+          <button class="chip" data-cat="telco" type="button" aria-pressed="false">Movistar</button>
+          <button class="chip" data-cat="programas" type="button" aria-pressed="false">Programas</button>
+        </div>
       </div>
+
+      <aside class="hero-right">
+        <div class="quick">
+          <h3>Acceso rápido</h3>
+          <p>Entrá a los recursos más usados o pedí ayuda al equipo.</p>
+          <div class="row">
+            <a class="cta primary" href="#beneficios">Explorar beneficios</a>
+            <a class="cta" href="#contacto">Necesito ayuda</a>
+          </div>
+        </div>
+      </aside>
     </section>
 
     <div class="grid">
-
-      <!-- Filters -->
-      <aside class="panel">
+      <aside class="panel" aria-label="Filtros">
         <div class="hd">
-          <h2>🔎 Buscar y filtrar</h2>
-          <span class="small">Demo</span>
+          <h2>Buscar y filtrar</h2>
+          <span style="font-size:12px;color:var(--muted);">Demo</span>
         </div>
         <div class="bd">
           <div class="field">
             <label for="q">Buscador</label>
-            <input id="q" type="search" placeholder="Buscá por OSDE, EAP, Movistar, etc." />
+            <input id="q" type="search" placeholder="Buscá por OSDE, EAP, Wellhub, Movistar, etc." />
           </div>
 
           <div class="field">
             <label for="cat">Categoría</label>
-            <select id="cat">
+            <select id="cat" aria-label="Categoría">
               <option value="all">Todas</option>
               <option value="salud">Salud</option>
               <option value="bienestar">Bienestar</option>
@@ -582,34 +575,33 @@
             </select>
           </div>
 
-          <div class="hint">.
-          </div>
+          <div class="hint">Tip: buscá por proveedor (OSDE), programa (EAP/Wellhub) o por código (307 / ORACLE).</div>
         </div>
       </aside>
 
-      <!-- Cards -->
-      <main class="panel" id="beneficios">
+      <main class="panel" id="beneficios" aria-label="Beneficios">
         <div class="hd">
-          <h2>📌 Beneficios disponibles</h2>
-          <span class="small">Actualizado: demo</span>
+          <h2>Beneficios disponibles</h2>
+          <span style="font-size:12px;color:var(--muted);">Actualizado: demo</span>
         </div>
+
         <div class="bd">
           <div class="cards" id="cards">
 
             <article class="card" data-cat="programas">
               <div class="row">
                 <div>
-                  <h3>✨ Hub de Beneficios (SharePoint)</h3>
+                  <h3>Hub de Beneficios (SharePoint)</h3>
                   <p>Acceso central a documentación y materiales de beneficios internos.</p>
                 </div>
-                <span class="badge top">🔥 Top</span>
+                <span class="badge top">Top</span>
               </div>
               <div class="tags">
                 <span class="tag red">Interno</span>
                 <span class="tag">Documentación</span>
                 <span class="tag">Bookmarks</span>
               </div>
-              <div class="actions">
+              <div class="actions-row">
                 <a class="linkbtn primary" href="#" onclick="alert('Reemplazá este link por tu SharePoint real.')">Abrir</a>
                 <a class="linkbtn" href="#" onclick="alert('Acá podés linkear una guía o FAQ interna.')">Guía / FAQ</a>
               </div>
@@ -618,16 +610,16 @@
             <article class="card" data-cat="salud">
               <div class="row">
                 <div>
-                  <h3>❤️ OSDE</h3>
-                  <p>Acceso a información del beneficio de cobertura médica (material en SharePoint).</p>
+                  <h3>OSDE</h3>
+                  <p>Acceso a información del beneficio de cobertura médica (material interno).</p>
                 </div>
-                <span class="badge new">✨ Nuevo</span>
+                <span class="badge new">Nuevo</span>
               </div>
               <div class="tags">
                 <span class="tag">Cobertura</span>
                 <span class="tag">Altas / bajas</span>
               </div>
-              <div class="actions">
+              <div class="actions-row">
                 <a class="linkbtn primary" href="#" onclick="alert('Pegá acá el link real de OSDE en SharePoint.')">Ver info</a>
                 <a class="linkbtn" href="#contacto">Necesito ayuda</a>
               </div>
@@ -636,105 +628,124 @@
             <article class="card" data-cat="bienestar">
               <div class="row">
                 <div>
-                  <h3>🧠 Programa de Asistencia al Empleado (EAP)</h3>
+                  <h3>Programa de Asistencia al Empleado (EAP)</h3>
                   <p>Soporte y asistencia para colaboradores (acceso externo).</p>
                 </div>
-                <span class="tag">Bienestar</span>
+                <span class="badge">Bienestar</span>
               </div>
               <div class="tags">
                 <span class="tag">Asistencia</span>
                 <span class="tag">Confidencial</span>
               </div>
-              <div class="actions">
-                <a class="linkbtn primary" href="https://oracle.one.telushealth.com" target="_blank" rel="noopener">Acceder</a>
+              <div class="actions-row">
+                <a class="linkbtn primary" href="https://oracle.one.telushealth.com" target="_blank" rel="noopener">Acceder ↗</a>
                 <a class="linkbtn" href="#contacto">Consultas</a>
+              </div>
+            </article>
+
+            <article class="card" data-cat="bienestar">
+              <div class="row">
+                <div>
+                  <h3>Wellhub (ex Gympass)</h3>
+                  <p>Plataforma de bienestar corporativo con suscripción: acceso a opciones de fitness y apps (mindfulness, nutrición, sueño y más), según elegibilidad.</p>
+                </div>
+                <span class="badge">Plataforma</span>
+              </div>
+              <div class="tags">
+                <span class="tag">Fitness</span>
+                <span class="tag">Mindfulness</span>
+                <span class="tag">Sueño</span>
+              </div>
+              <div class="actions-row">
+                <a class="linkbtn primary" href="https://wellhub.com/es-ar/" target="_blank" rel="noopener">Ir a Wellhub ↗</a>
+                <a class="linkbtn" href="https://helpcenter.gympass.com/en-us/articles/how-does-gympass-work" target="_blank" rel="noopener">Cómo funciona ↗</a>
               </div>
             </article>
 
             <article class="card" data-cat="retail">
               <div class="row">
                 <div>
-                  <h3>🍷 Bodegas Peñaflor</h3>
+                  <h3>Bodegas Peñaflor</h3>
                   <p>Beneficios y descuentos en compras (acceso externo).</p>
                 </div>
-                <span class="tag">Compras</span>
+                <span class="badge">Compras</span>
               </div>
               <div class="tags">
                 <span class="tag">Descuentos</span>
                 <span class="tag">E-commerce</span>
               </div>
-              <div class="actions">
-                <a class="linkbtn primary" href="https://vi.grupo-penaflor.com.ar" target="_blank" rel="noopener">Ir al sitio</a>
+              <div class="actions-row">
+                <a class="linkbtn primary" href="https://vi.grupo-penaflor.com.ar" target="_blank" rel="noopener">Ir al sitio ↗</a>
               </div>
             </article>
 
             <article class="card" data-cat="retail">
               <div class="row">
                 <div>
-                  <h3>🛒 Club de Beneficios Unilever</h3>
+                  <h3>Club de Beneficios Unilever</h3>
                   <p>Descuentos y beneficios en productos seleccionados.</p>
                 </div>
-                <span class="tag">Compras</span>
+                <span class="badge">Ahorro</span>
               </div>
               <div class="tags">
                 <span class="tag">Productos</span>
                 <span class="tag">Ahorro</span>
               </div>
-              <div class="actions">
-                <a class="linkbtn primary" href="https://clubdebeneficios.com" target="_blank" rel="noopener">Ir al sitio</a>
+              <div class="actions-row">
+                <a class="linkbtn primary" href="https://clubdebeneficios.com" target="_blank" rel="noopener">Ir al sitio ↗</a>
               </div>
             </article>
 
             <article class="card" data-cat="telco">
               <div class="row">
                 <div>
-                  <h3>📱 Movistar</h3>
+                  <h3>Movistar</h3>
                   <p>Ingresá con el <strong>código 307</strong> para acceder a la oferta para empleados.</p>
                 </div>
-                <span class="tag">Teleco</span>
+                <span class="badge">Teleco</span>
               </div>
               <div class="tags">
                 <span class="tag red">Código: 307</span>
                 <span class="tag">Ofertas</span>
               </div>
-              <div class="actions">
-                <a class="linkbtn primary" href="https://ofertas.movistar.com.ar" target="_blank" rel="noopener">Ver ofertas</a>
-                <button class="linkbtn" onclick="navigator.clipboard.writeText('307'); alert('Código 307 copiado ✅');">Copiar código</button>
+              <div class="actions-row">
+                <a class="linkbtn primary" href="https://ofertas.movistar.com.ar" target="_blank" rel="noopener">Ver ofertas ↗</a>
+                <button class="linkbtn" type="button" data-copy="307">Copiar código</button>
               </div>
             </article>
 
             <article class="card" data-cat="retail">
               <div class="row">
                 <div>
-                  <h3>🛍️ Samshop (Samsung)</h3>
+                  <h3>Samshop (Samsung)</h3>
                   <p>Beneficios exclusivos para empleados en productos Samsung.</p>
                 </div>
-                <span class="tag">Compras</span>
+                <span class="badge">Electrónica</span>
               </div>
               <div class="tags">
                 <span class="tag">Electrónica</span>
                 <span class="tag">Descuentos</span>
               </div>
-              <div class="actions">
-                <a class="linkbtn primary" href="https://www.samshop.com" target="_blank" rel="noopener">Ir a Samshop</a>
+              <div class="actions-row">
+                <a class="linkbtn primary" href="https://www.samshop.com" target="_blank" rel="noopener">Ir al sitio ↗</a>
               </div>
             </article>
 
             <article class="card" data-cat="retail">
               <div class="row">
                 <div>
-                  <h3>🧴 Tienda Andrómaco</h3>
+                  <h3>Tienda Andrómaco</h3>
                   <p>Beneficio con código de descuento para Oracle.</p>
                 </div>
-                <span class="tag">Compras</span>
+                <span class="badge">Cuidado personal</span>
               </div>
               <div class="tags">
                 <span class="tag">Cuidado personal</span>
                 <span class="tag red">Código: ORACLE</span>
               </div>
-              <div class="actions">
-                <a class="linkbtn primary" href="https://tienda.andromaco.com" target="_blank" rel="noopener">Ir a la tienda</a>
-                <button class="linkbtn" onclick="navigator.clipboard.writeText('ORACLE'); alert('Código ORACLE copiado ✅');">Copiar código</button>
+              <div class="actions-row">
+                <a class="linkbtn primary" href="https://tienda.andromaco.com" target="_blank" rel="noopener">Ir a la tienda ↗</a>
+                <button class="linkbtn" type="button" data-copy="ORACLE">Copiar código</button>
               </div>
             </article>
 
@@ -744,56 +755,77 @@
     </div>
 
     <div class="foot" id="contacto">
-      <strong>Contacto</strong><br/>
+      <strong style="color:#111;">Contacto</strong><br/>
       Si necesitás ayuda o querés sugerir un beneficio nuevo, escribí a
-      <a href="mailto:camilo.eguiazabal@oracle.com"><strong>camilo.eguiazabal@oracle.com</strong></a>
-      o por Slack <strong>@ceguiaza</strong>.
+      <a href="mailto:camilo.eguiazabal@oracle.com"><strong style="color:#111;">camilo.eguiazabal@oracle.com</strong></a>
+      o por Slack <strong style="color:#111;">@ceguiaza</strong>.
     </div>
-
   </div>
 
+  <div id="toast" role="status" aria-live="polite"></div>
+
   <script>
-    // Demo filtering (simple)
+    // ===== Filtering (synced chip + select) =====
     const q = document.getElementById("q");
     const cat = document.getElementById("cat");
-    const chips = document.querySelectorAll(".chip");
-    const cards = () => Array.from(document.querySelectorAll("#cards .card"));
+    const chips = Array.from(document.querySelectorAll(".chip"));
+    const getCards = () => Array.from(document.querySelectorAll("#cards .card"));
 
     let chipCat = "all";
 
     function applyFilters(){
       const term = (q.value || "").toLowerCase().trim();
-      const selectCat = cat.value;
-      const effectiveCat = (chipCat !== "all") ? chipCat : selectCat;
+      const effectiveCat = chipCat;
 
-      cards().forEach(card => {
+      getCards().forEach(card => {
         const c = card.getAttribute("data-cat") || "all";
-        const text = card.innerText.toLowerCase();
+        const text = (card.textContent || "").toLowerCase();
         const matchText = !term || text.includes(term);
         const matchCat = (effectiveCat === "all") || (c === effectiveCat);
         card.style.display = (matchText && matchCat) ? "" : "none";
       });
     }
 
-    q.addEventListener("input", applyFilters);
-    cat.addEventListener("change", () => {
-      chipCat = "all";
-      chips.forEach(x=>x.classList.remove("active"));
-      chips[0].classList.add("active");
-      applyFilters();
-    });
+    function setActiveChip(value){
+      chipCat = value || "all";
+      cat.value = chipCat;
 
-    chips.forEach(ch => {
-      ch.addEventListener("click", () => {
-        chips.forEach(x=>x.classList.remove("active"));
-        ch.classList.add("active");
-        chipCat = ch.getAttribute("data-cat") || "all";
-        cat.value = "all";
-        applyFilters();
+      chips.forEach(x=>{
+        const is = (x.getAttribute("data-cat") || "all") === chipCat;
+        x.classList.toggle("active", is);
+        x.setAttribute("aria-pressed", is ? "true" : "false");
       });
-    });
 
-    applyFilters();
+      applyFilters();
+    }
+
+    q.addEventListener("input", applyFilters);
+    cat.addEventListener("change", () => setActiveChip(cat.value));
+    chips.forEach(ch => ch.addEventListener("click", () => setActiveChip(ch.getAttribute("data-cat") || "all")));
+    setActiveChip("all");
+
+    // ===== Toast + copy =====
+    const toast = document.getElementById("toast");
+    let toastT;
+
+    function showToast(msg){
+      toast.textContent = msg;
+      toast.style.display = "inline-flex";
+      clearTimeout(toastT);
+      toastT = setTimeout(()=> toast.style.display="none", 1800);
+    }
+
+    document.addEventListener("click", async (e)=>{
+      const btn = e.target.closest("[data-copy]");
+      if(!btn) return;
+      const val = btn.getAttribute("data-copy");
+      try{
+        await navigator.clipboard.writeText(val);
+        showToast(`Código ${val} copiado`);
+      }catch{
+        showToast("No pude copiar. Copialo manualmente.");
+      }
+    });
   </script>
 </body>
 </html>
