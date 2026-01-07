@@ -12,8 +12,6 @@
       --oracle-red-dark:#B33D2E;
 
       --carbon:#2B2B2B;
-      --carbon-2:#1F1F1F;
-
       --ink:#0B0B0B;
       --muted:#5B5B5B;
 
@@ -25,15 +23,13 @@
 
       --max:1180px;
 
-      /* Font strategy:
-         If Oracle corporate fonts exist in the environment, they will render.
-         Otherwise, close fallbacks are used (legal + safe).
-      */
+      /* Font strategy: uses Oracle fonts if present, otherwise safe fallbacks */
       --oracle-sans: "Oracle Sans", "OracleSans", "Oracle Sans UI", "Oracle Sans UI Text",
                      "Helvetica Neue", Helvetica, Arial, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-
       --oracle-serif: "Oracle Serif", "OracleSerif", "Oracle Serif Display",
                       "Georgia", "Times New Roman", Times, serif;
+
+      --r: 18px;
     }
 
     *{ box-sizing:border-box; }
@@ -48,7 +44,7 @@
     a{ color:inherit; text-decoration:none; }
     a:hover{ text-decoration:underline; }
 
-    /* ===== Oracle-like top header ===== */
+    /* ===== Oracle-like header ===== */
     header{
       position:sticky;
       top:0;
@@ -61,21 +57,21 @@
     .top{
       max-width: var(--max);
       margin:0 auto;
-      padding: 14px 16px;
+      padding: 12px 16px;
       display:flex;
       align-items:center;
       justify-content:space-between;
-      gap:14px;
+      gap:12px;
     }
 
     .brand{
       display:flex;
       align-items:center;
-      gap:14px;
-      min-width: 260px;
+      gap:12px;
+      min-width: 240px;
     }
     .oracle-logo{
-      height: 26px;
+      height: 24px;
       width:auto;
       display:block;
     }
@@ -126,7 +122,7 @@
       justify-content:center;
       gap:8px;
       padding: 10px 14px;
-      border-radius: 10px;
+      border-radius: 12px;
       border: 1px solid rgba(255,255,255,.22);
       background: rgba(255,255,255,.06);
       color:#fff;
@@ -149,14 +145,14 @@
     .wrap{
       max-width: var(--max);
       margin:0 auto;
-      padding: 20px 16px 56px;
+      padding: 16px 16px 56px;
     }
 
-    /* ===== Hero (oracle.com vibe) ===== */
+    /* ===== Hero ===== */
     .hero{
       background: #fff;
       border:1px solid var(--line);
-      border-radius: 18px;
+      border-radius: var(--r);
       overflow:hidden;
       box-shadow: var(--shadow);
       display:grid;
@@ -167,8 +163,7 @@
     }
 
     .hero-left{
-      padding: 26px 22px 22px;
-      position:relative;
+      padding: 22px 18px 18px;
       background:
         linear-gradient(135deg, rgba(199,70,52,.10), transparent 55%),
         linear-gradient(180deg, #fff, #fff);
@@ -186,7 +181,7 @@
       margin: 10px 0 0;
       font-family: var(--oracle-serif);
       font-weight: 500;
-      font-size: 34px;
+      font-size: 30px;
       line-height:1.12;
       letter-spacing:-.2px;
       color:#111;
@@ -195,13 +190,13 @@
     .hero p{
       margin: 12px 0 0;
       color: var(--muted);
-      font-size: 15px;
+      font-size: 14px;
       line-height:1.6;
       max-width: 72ch;
     }
 
     .hero-right{
-      padding: 20px 22px;
+      padding: 18px;
       background: #FAFAFA;
       border-top:1px solid var(--line);
     }
@@ -239,7 +234,7 @@
       justify-content:center;
       gap:8px;
       padding: 10px 14px;
-      border-radius: 10px;
+      border-radius: 12px;
       border:1px solid var(--line);
       background:#fff;
       font-size:13px;
@@ -255,6 +250,7 @@
     }
     .cta.primary:hover{ background: var(--oracle-red-dark); border-color: var(--oracle-red-dark); }
 
+    /* Chips (keep emojis) */
     .chips{
       display:flex;
       flex-wrap:wrap;
@@ -284,7 +280,7 @@
 
     /* ===== Layout ===== */
     .grid{
-      margin-top: 16px;
+      margin-top: 14px;
       display:grid;
       grid-template-columns: 1fr;
       gap:14px;
@@ -296,7 +292,7 @@
     .panel{
       background:#fff;
       border:1px solid var(--line);
-      border-radius: 18px;
+      border-radius: var(--r);
       box-shadow: var(--shadow);
       overflow:hidden;
     }
@@ -325,7 +321,7 @@
       border-radius: 12px;
       border:1px solid var(--line);
       outline:none;
-      font-size:14px;
+      font-size:16px; /* better mobile */
       background:#fff;
       transition: box-shadow .12s ease, border-color .12s ease;
     }
@@ -461,7 +457,7 @@
       margin-top:16px;
       padding: 14px 16px;
       border:1px solid var(--line);
-      border-radius: 18px;
+      border-radius: var(--r);
       background:#fff;
       box-shadow: var(--shadow);
       color: var(--muted);
@@ -484,16 +480,77 @@
       font-size:13px;
       display:none;
       z-index:9999;
+      max-width: calc(100vw - 24px);
+      text-align:center;
     }
 
-    /* Mobile */
+    /* ===== Mobile optimizations ===== */
     @media (max-width: 760px){
       nav{ display:none; }
-      .hero h1{ font-size: 28px; }
-      .top{ gap:10px; }
-      .actions{ gap:8px; }
-      .btn{ padding:10px 12px; border-radius: 12px; }
+      .top{
+        padding: 10px 12px;
+        gap:10px;
+      }
+      .brand{
+        min-width:0;
+        flex: 1 1 auto;
+      }
+      .brand-meta strong{ font-size:12.5px; }
+      .brand-meta span{ font-size:12px; }
+
+      .actions{
+        flex: 0 0 auto;
+        gap:8px;
+      }
+
+      .btn{
+        padding: 10px 12px;
+        border-radius: 12px;
+      }
+
+      .wrap{ padding: 12px 12px 52px; }
+
+      .hero-left{ padding: 18px 14px 14px; }
+      .hero-right{ padding: 14px; }
+      .hero h1{ font-size: 24px; }
+
+      .chips{
+        gap:8px;
+      }
+      .chip{
+        padding:8px 10px;
+        font-size:13px;
+      }
+
+      .grid{ gap:12px; }
+      .panel .hd{ padding: 12px 12px; }
+      .panel .bd{ padding: 12px 12px; }
+
+      .cards{ grid-template-columns: 1fr; }
+
+      .actions-row{
+        flex-direction:column;
+        gap:10px;
+      }
+      .linkbtn{
+        width:100%;
+        padding: 12px 12px;
+      }
+
+      .btn, .cta{
+        white-space:nowrap;
+      }
     }
+
+    @media (max-width: 390px){
+      /* ultra small phones: stack header buttons */
+      .top{ align-items:flex-start; }
+      .actions{ width:100%; display:grid; grid-template-columns: 1fr 1fr; }
+      .btn{ width:100%; }
+    }
+
+    /* Better tap targets */
+    button, a { -webkit-tap-highlight-color: transparent; }
   </style>
 </head>
 
@@ -526,26 +583,26 @@
     <section class="hero" aria-label="Hero">
       <div class="hero-left">
         <div class="kicker">ORACLE · BENEFITS HUB</div>
-        <h1>Tu Hub de Beneficios</h1>
+        <h1><span>✨ Your Benefits Hub</span></h1>
         <p>Encontrá beneficios internos y externos en un solo lugar. Usá el buscador o filtrá por categoría.</p>
 
         <div class="chips" aria-label="Categorías rápidas">
-          <button class="chip active" data-cat="all" type="button" aria-pressed="true">Todos</button>
-          <button class="chip" data-cat="salud" type="button" aria-pressed="false">Salud</button>
-          <button class="chip" data-cat="bienestar" type="button" aria-pressed="false">Bienestar</button>
-          <button class="chip" data-cat="retail" type="button" aria-pressed="false">Compras</button>
-          <button class="chip" data-cat="telco" type="button" aria-pressed="false">Movistar</button>
-          <button class="chip" data-cat="programas" type="button" aria-pressed="false">Programas</button>
+          <button class="chip active" data-cat="all" type="button" aria-pressed="true">✨ Todos</button>
+          <button class="chip" data-cat="salud" type="button" aria-pressed="false">❤️ Salud</button>
+          <button class="chip" data-cat="bienestar" type="button" aria-pressed="false">🧠 Bienestar</button>
+          <button class="chip" data-cat="retail" type="button" aria-pressed="false">🛍️ Compras</button>
+          <button class="chip" data-cat="telco" type="button" aria-pressed="false">📱 Movistar</button>
+          <button class="chip" data-cat="programas" type="button" aria-pressed="false">🎟️ Programas</button>
         </div>
       </div>
 
       <aside class="hero-right">
         <div class="quick">
-          <h3>Acceso rápido</h3>
+          <h3>📌 Acceso rápido</h3>
           <p>Entrá a los recursos más usados o pedí ayuda al equipo.</p>
           <div class="row">
-            <a class="cta primary" href="#beneficios">Explorar beneficios</a>
-            <a class="cta" href="#contacto">Necesito ayuda</a>
+            <a class="cta primary" href="#beneficios">Ver beneficios</a>
+            <a class="cta" href="#contacto">Contacto</a>
           </div>
         </div>
       </aside>
@@ -554,7 +611,7 @@
     <div class="grid">
       <aside class="panel" aria-label="Filtros">
         <div class="hd">
-          <h2>Buscar y filtrar</h2>
+          <h2>🔎 Buscar y filtrar</h2>
           <span style="font-size:12px;color:var(--muted);">Demo</span>
         </div>
         <div class="bd">
@@ -581,7 +638,7 @@
 
       <main class="panel" id="beneficios" aria-label="Beneficios">
         <div class="hd">
-          <h2>Beneficios disponibles</h2>
+          <h2>📌 Beneficios disponibles</h2>
           <span style="font-size:12px;color:var(--muted);">Actualizado: demo</span>
         </div>
 
@@ -591,10 +648,10 @@
             <article class="card" data-cat="programas">
               <div class="row">
                 <div>
-                  <h3>Hub de Beneficios (SharePoint)</h3>
+                  <h3>✨ Hub de Beneficios (SharePoint)</h3>
                   <p>Acceso central a documentación y materiales de beneficios internos.</p>
                 </div>
-                <span class="badge top">Top</span>
+                <span class="badge top">🔥 Top</span>
               </div>
               <div class="tags">
                 <span class="tag red">Interno</span>
@@ -610,10 +667,10 @@
             <article class="card" data-cat="salud">
               <div class="row">
                 <div>
-                  <h3>OSDE</h3>
+                  <h3>❤️ OSDE</h3>
                   <p>Acceso a información del beneficio de cobertura médica (material interno).</p>
                 </div>
-                <span class="badge new">Nuevo</span>
+                <span class="badge new">✨ Nuevo</span>
               </div>
               <div class="tags">
                 <span class="tag">Cobertura</span>
@@ -628,7 +685,7 @@
             <article class="card" data-cat="bienestar">
               <div class="row">
                 <div>
-                  <h3>Programa de Asistencia al Empleado (EAP)</h3>
+                  <h3>🧠 Programa de Asistencia al Empleado (EAP)</h3>
                   <p>Soporte y asistencia para colaboradores (acceso externo).</p>
                 </div>
                 <span class="badge">Bienestar</span>
@@ -646,7 +703,7 @@
             <article class="card" data-cat="bienestar">
               <div class="row">
                 <div>
-                  <h3>Wellhub (ex Gympass)</h3>
+                  <h3>🏋️ Wellhub (ex Gympass)</h3>
                   <p>Plataforma de bienestar corporativo con suscripción: acceso a opciones de fitness y apps (mindfulness, nutrición, sueño y más), según elegibilidad.</p>
                 </div>
                 <span class="badge">Plataforma</span>
@@ -665,7 +722,7 @@
             <article class="card" data-cat="retail">
               <div class="row">
                 <div>
-                  <h3>Bodegas Peñaflor</h3>
+                  <h3>🍷 Bodegas Peñaflor</h3>
                   <p>Beneficios y descuentos en compras (acceso externo).</p>
                 </div>
                 <span class="badge">Compras</span>
@@ -682,7 +739,7 @@
             <article class="card" data-cat="retail">
               <div class="row">
                 <div>
-                  <h3>Club de Beneficios Unilever</h3>
+                  <h3>🛒 Club de Beneficios Unilever</h3>
                   <p>Descuentos y beneficios en productos seleccionados.</p>
                 </div>
                 <span class="badge">Ahorro</span>
@@ -699,7 +756,7 @@
             <article class="card" data-cat="telco">
               <div class="row">
                 <div>
-                  <h3>Movistar</h3>
+                  <h3>📱 Movistar</h3>
                   <p>Ingresá con el <strong>código 307</strong> para acceder a la oferta para empleados.</p>
                 </div>
                 <span class="badge">Teleco</span>
@@ -717,7 +774,7 @@
             <article class="card" data-cat="retail">
               <div class="row">
                 <div>
-                  <h3>Samshop (Samsung)</h3>
+                  <h3>🛍️ Samshop (Samsung)</h3>
                   <p>Beneficios exclusivos para empleados en productos Samsung.</p>
                 </div>
                 <span class="badge">Electrónica</span>
@@ -727,14 +784,14 @@
                 <span class="tag">Descuentos</span>
               </div>
               <div class="actions-row">
-                <a class="linkbtn primary" href="https://www.samshop.com" target="_blank" rel="noopener">Ir al sitio ↗</a>
+                <a class="linkbtn primary" href="https://www.samshop.com" target="_blank" rel="noopener">Ir a Samshop ↗</a>
               </div>
             </article>
 
             <article class="card" data-cat="retail">
               <div class="row">
                 <div>
-                  <h3>Tienda Andrómaco</h3>
+                  <h3>🧴 Tienda Andrómaco</h3>
                   <p>Beneficio con código de descuento para Oracle.</p>
                 </div>
                 <span class="badge">Cuidado personal</span>
@@ -821,7 +878,7 @@
       const val = btn.getAttribute("data-copy");
       try{
         await navigator.clipboard.writeText(val);
-        showToast(`Código ${val} copiado`);
+        showToast(`Código ${val} copiado ✅`);
       }catch{
         showToast("No pude copiar. Copialo manualmente.");
       }
