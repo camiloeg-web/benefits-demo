@@ -3,29 +3,40 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Oracle Argentina | Beneficios </title>
+  <title>Oracle Argentina | Beneficios</title>
 
   <style>
     :root{
-      --oracle-red:#C74634;
-      --bg:#ffffff;
-      --bg2:#f6f7f9;
+      /* Soft/Wow palette */
+      --berry:#7B2D6D;
+      --rose:#FDECEF;
+      --rose2:#FFF5F7;
+      --pink:#F7B6C8;
+      --peach:#FFD6C9;
+
       --text:#111827;
       --muted:#6b7280;
-      --line:#e5e7eb;
-      --card:#ffffff;
-      --shadow: 0 10px 22px rgba(17,24,39,.08);
-      --radius: 16px;
+
+      --card:rgba(255,255,255,.86);
+      --shadow: 0 14px 34px rgba(17,24,39,.12);
+      --shadow2: 0 10px 18px rgba(17,24,39,.08);
+
+      --radius: 18px;
       --max: 1180px;
       --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
     }
 
     *{ box-sizing:border-box; }
+    html, body{ height:100%; }
     body{
       margin:0;
       font-family:var(--font);
       color:var(--text);
-      background:linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%);
+      background:
+        radial-gradient(900px 520px at 10% -10%, rgba(247,182,200,.45), transparent 60%),
+        radial-gradient(820px 520px at 95% -10%, rgba(255,214,201,.45), transparent 55%),
+        radial-gradient(900px 600px at 50% 120%, rgba(123,45,109,.10), transparent 65%),
+        linear-gradient(180deg, var(--rose2) 0%, #f6f7fb 55%, #f6f7f9 100%);
     }
 
     a{ color:inherit; text-decoration:none; }
@@ -33,57 +44,112 @@
 
     .wrap{ max-width:var(--max); margin:0 auto; padding:26px 16px 64px; }
 
-    /* Topbar */
+    /* ===== Topbar (glass) ===== */
     .topbar{
       display:flex; align-items:center; justify-content:space-between; gap:14px;
       padding:14px 16px;
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.9);
+      border:1px solid rgba(255,255,255,.65);
+      background:rgba(255,255,255,.55);
       border-radius:22px;
       box-shadow: var(--shadow);
       position:sticky; top:12px; z-index:10;
-      backdrop-filter: blur(10px);
+      backdrop-filter: blur(14px);
+      overflow:hidden;
     }
+
+    /* subtle shimmer line */
+    .topbar:before{
+      content:"";
+      position:absolute;
+      inset:-40px -40px auto -40px;
+      height:90px;
+      background: linear-gradient(90deg, transparent, rgba(247,182,200,.35), rgba(255,214,201,.35), transparent);
+      transform: rotate(-4deg);
+      pointer-events:none;
+      opacity:.8;
+    }
+
     .brand{
       display:flex; align-items:center; gap:12px;
       min-width: 260px;
+      position:relative;
+      z-index:1;
     }
-    .brand img{
-      height:26px;
-      width:auto;
+
+    /* Logo container (FIX + WOW) */
+    .logo-wrap{
+      width: 92px;
+      height: 42px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border-radius: 16px;
+
+      background: rgba(255,255,255,.78);
+      border: 1px solid rgba(123,45,109,.14);
+      box-shadow: 0 12px 18px rgba(17,24,39,.10);
+      position:relative;
+      overflow:hidden;
+    }
+    .logo-wrap:before{
+      content:"";
+      position:absolute; inset:-2px;
+      background:
+        radial-gradient(160px 80px at 20% 20%, rgba(247,182,200,.55), transparent 60%),
+        radial-gradient(160px 80px at 80% 20%, rgba(255,214,201,.55), transparent 60%);
+      opacity:.9;
+      pointer-events:none;
+    }
+    .oracle-logo{
+      width: 72px;
+      height: auto;
       display:block;
+      position:relative;
+      z-index:1;
+      filter: drop-shadow(0 6px 14px rgba(17,24,39,.10));
     }
+
     .brand .title{
       display:flex; flex-direction:column;
-      line-height:1.15;
+      line-height:1.12;
     }
-    .brand .title strong{ font-size:13px; letter-spacing:.2px; }
-    .brand .title span{ font-size:12px; color:var(--muted); }
+    .brand .title strong{
+      font-size:13px;
+      letter-spacing:.2px;
+    }
+    .brand .title span{
+      font-size:12px;
+      color:var(--muted);
+    }
 
     .btn{
-      display:inline-flex; align-items:center; gap:8px;
+      display:inline-flex; align-items:center; justify-content:center; gap:8px;
       padding:10px 12px;
       border-radius:999px;
-      border:1px solid var(--line);
-      background:#fff;
+      border:1px solid rgba(255,255,255,.7);
+      background:rgba(255,255,255,.7);
       cursor:pointer;
       font-size:13px;
       color:var(--text);
-      transition:.12s ease;
+      transition: transform .12s ease, box-shadow .12s ease, background .12s ease, border-color .12s ease;
       white-space:nowrap;
+      position:relative;
+      z-index:1;
     }
-    .btn:hover{ transform:translateY(-1px); box-shadow:0 8px 16px rgba(17,24,39,.06); }
+    .btn:hover{ transform:translateY(-1px); box-shadow:0 12px 18px rgba(17,24,39,.10); }
+
     .btn.primary{
-      border-color:rgba(199,70,52,.35);
-      background:rgba(199,70,52,.08);
+      border-color: rgba(123,45,109,.20);
+      background: linear-gradient(180deg, rgba(123,45,109,.14), rgba(247,182,200,.22));
+      color: #2a1030;
     }
 
-    /* Hero */
+    /* ===== Hero ===== */
     .hero{
       margin-top:16px;
       padding:22px 18px;
-      border:1px solid var(--line);
-      background:#fff;
+      border:1px solid rgba(255,255,255,.65);
+      background: linear-gradient(180deg, rgba(255,255,255,.88) 0%, rgba(253,236,239,.76) 60%, rgba(255,255,255,.84) 100%);
       border-radius:22px;
       box-shadow: var(--shadow);
       overflow:hidden;
@@ -93,35 +159,75 @@
       content:"";
       position:absolute; inset:-2px;
       background:
-        radial-gradient(900px 200px at 20% 0%, rgba(199,70,52,.12), transparent 60%),
-        radial-gradient(700px 220px at 80% 0%, rgba(199,70,52,.08), transparent 55%);
+        radial-gradient(920px 260px at 18% 0%, rgba(247,182,200,.55), transparent 62%),
+        radial-gradient(800px 280px at 85% 0%, rgba(255,214,201,.55), transparent 60%),
+        radial-gradient(900px 360px at 50% 120%, rgba(123,45,109,.10), transparent 65%);
       pointer-events:none;
     }
-    .hero h1{ margin:0; font-size:22px; position:relative; }
-    .hero p{ margin:8px 0 0; color:var(--muted); line-height:1.45; position:relative; }
-    .hero .chips{
-      margin-top:12px;
+
+    /* hero glow blob */
+    .hero:after{
+      content:"";
+      position:absolute;
+      width: 280px;
+      height: 280px;
+      right: -110px;
+      top: -110px;
+      background: radial-gradient(circle at 30% 30%, rgba(247,182,200,.70), transparent 60%);
+      filter: blur(2px);
+      opacity:.75;
+      pointer-events:none;
+    }
+
+    .hero h1{
+      margin:0;
+      font-size:28px;
+      position:relative;
+      letter-spacing:-.6px;
+    }
+    .hero h1 .grad{
+      background: linear-gradient(90deg, #1f2937, #2a1030, rgba(123,45,109,.95));
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+    }
+    .hero p{
+      margin:10px 0 0;
+      color:rgba(75,85,99,.98);
+      line-height:1.55;
+      position:relative;
+      max-width: 72ch;
+    }
+
+    .chips{
+      margin-top:14px;
       display:flex; flex-wrap:wrap; gap:10px;
       position:relative;
     }
+
     .chip{
       display:inline-flex; align-items:center; gap:8px;
-      padding:8px 10px;
+      padding:8px 11px;
       border-radius:999px;
-      border:1px solid var(--line);
-      background:#fff;
+      border:1px solid rgba(255,255,255,.70);
+      background: rgba(255,255,255,.70);
       font-size:12px;
-      color:var(--muted);
+      color:rgba(75,85,99,.96);
       cursor:pointer;
       user-select:none;
+      transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease, background .12s ease;
+    }
+    .chip:hover{
+      transform: translateY(-1px);
+      box-shadow: 0 12px 16px rgba(17,24,39,.08);
     }
     .chip.active{
-      color:var(--text);
-      border-color:rgba(199,70,52,.35);
-      background:rgba(199,70,52,.06);
+      color:#2a1030;
+      border-color: rgba(123,45,109,.22);
+      background: linear-gradient(180deg, rgba(123,45,109,.14), rgba(247,182,200,.22));
     }
 
-    /* Layout */
+    /* ===== Layout ===== */
     .grid{
       margin-top:16px;
       display:grid;
@@ -133,20 +239,33 @@
     }
 
     .panel{
-      border:1px solid var(--line);
-      background:#fff;
+      border:1px solid rgba(255,255,255,.65);
+      background: rgba(255,255,255,.70);
       border-radius:22px;
       box-shadow: var(--shadow);
       overflow:hidden;
+      backdrop-filter: blur(10px);
+      position:relative;
     }
+    /* subtle inner border */
+    .panel:before{
+      content:"";
+      position:absolute; inset:0;
+      border-radius:22px;
+      border:1px solid rgba(123,45,109,.06);
+      pointer-events:none;
+    }
+
     .panel .hd{
       padding:14px 16px;
-      border-bottom:1px solid var(--line);
+      border-bottom:1px solid rgba(255,255,255,.65);
       display:flex; align-items:center; justify-content:space-between; gap:10px;
-      background:#fff;
+      background: linear-gradient(180deg, rgba(255,255,255,.78), rgba(255,255,255,.55));
+      position:relative;
+      z-index:1;
     }
     .panel .hd h2{ margin:0; font-size:14px; letter-spacing:.2px; }
-    .panel .bd{ padding:14px 16px; }
+    .panel .bd{ padding:14px 16px; position:relative; z-index:1; }
 
     label{ display:block; font-size:12px; color:var(--muted); margin-bottom:6px; }
     .field{ margin-bottom:12px; }
@@ -155,20 +274,26 @@
       width:100%;
       padding:12px 12px;
       border-radius:14px;
-      border:1px solid var(--line);
-      background:#fff;
+      border:1px solid rgba(255,255,255,.75);
+      background:rgba(255,255,255,.82);
       outline:none;
       font-size:14px;
+      transition: box-shadow .12s ease, border-color .12s ease, background .12s ease;
+    }
+    input[type="search"]:focus, select:focus{
+      border-color: rgba(123,45,109,.22);
+      box-shadow: 0 0 0 6px rgba(247,182,200,.22);
+      background: rgba(255,255,255,.94);
     }
 
     .hint{
       font-size:12px;
-      color:var(--muted);
+      color:rgba(107,114,128,.98);
       margin-top:8px;
-      line-height:1.4;
+      line-height:1.45;
     }
 
-    /* Cards */
+    /* ===== Cards ===== */
     .cards{
       display:grid;
       grid-template-columns: 1fr;
@@ -179,30 +304,68 @@
     }
 
     .card{
-      border:1px solid var(--line);
+      position:relative;
+      border:1px solid rgba(255,255,255,.7);
       border-radius:20px;
-      background:var(--card);
-      box-shadow:0 10px 18px rgba(17,24,39,.06);
+      background: var(--card);
+      box-shadow: var(--shadow2);
       padding:14px 14px 12px;
       display:flex;
       flex-direction:column;
       gap:10px;
       min-height: 160px;
+      overflow:hidden;
+      transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease;
+      backdrop-filter: blur(10px);
     }
+    .card:hover{
+      transform: translateY(-2px);
+      box-shadow: 0 18px 30px rgba(17,24,39,.12);
+      border-color: rgba(123,45,109,.18);
+    }
+
+    /* category ribbon */
+    .card:before{
+      content:"";
+      position:absolute;
+      left:0; top:0;
+      width:100%;
+      height:7px;
+      background: linear-gradient(90deg, rgba(247,182,200,.95), rgba(255,214,201,.95));
+    }
+    .card[data-cat="salud"]:before{
+      background: linear-gradient(90deg, rgba(255,99,132,.55), rgba(255,214,201,.90));
+    }
+    .card[data-cat="bienestar"]:before{
+      background: linear-gradient(90deg, rgba(147,197,253,.55), rgba(247,182,200,.85));
+    }
+    .card[data-cat="retail"]:before{
+      background: linear-gradient(90deg, rgba(167,243,208,.60), rgba(255,214,201,.90));
+    }
+    .card[data-cat="telco"]:before{
+      background: linear-gradient(90deg, rgba(196,181,253,.65), rgba(247,182,200,.85));
+    }
+    .card[data-cat="programas"]:before{
+      background: linear-gradient(90deg, rgba(251,191,36,.65), rgba(255,214,201,.90));
+    }
+
     .card .row{
       display:flex; align-items:flex-start; justify-content:space-between; gap:10px;
+      padding-top:2px;
     }
     .card h3{
       margin:0;
       font-size:15px;
       line-height:1.25;
+      letter-spacing:-.1px;
     }
     .card p{
       margin:0;
       font-size:13px;
-      color:var(--muted);
-      line-height:1.4;
+      color:rgba(107,114,128,.98);
+      line-height:1.48;
     }
+
     .tags{
       display:flex; flex-wrap:wrap; gap:8px;
     }
@@ -210,48 +373,148 @@
       font-size:12px;
       padding:6px 9px;
       border-radius:999px;
-      border:1px solid var(--line);
-      color:var(--muted);
-      background:#fff;
+      border:1px solid rgba(255,255,255,.75);
+      color:rgba(107,114,128,.98);
+      background:rgba(255,255,255,.76);
     }
     .tag.red{
-      border-color:rgba(199,70,52,.28);
-      color:rgba(199,70,52,.95);
-      background:rgba(199,70,52,.06);
+      border-color: rgba(123,45,109,.18);
+      color: rgba(123,45,109,.95);
+      background: rgba(247,182,200,.22);
     }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      font-size:11px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.8);
+      background:rgba(255,255,255,.78);
+      color:#2a1030;
+      box-shadow: 0 10px 14px rgba(17,24,39,.08);
+      white-space:nowrap;
+    }
+    .badge.top{
+      background: linear-gradient(180deg, rgba(255,214,201,.70), rgba(247,182,200,.40));
+      border-color: rgba(123,45,109,.18);
+    }
+    .badge.new{
+      background: linear-gradient(180deg, rgba(167,243,208,.45), rgba(255,255,255,.76));
+      border-color: rgba(16,185,129,.22);
+      color:#064e3b;
+    }
+
     .actions{
       margin-top:auto;
       display:flex; gap:10px; flex-wrap:wrap;
     }
 
     .linkbtn{
-      display:inline-flex; align-items:center; gap:8px;
+      display:inline-flex; align-items:center; justify-content:center; gap:8px;
       padding:10px 12px;
       border-radius:14px;
-      border:1px solid var(--line);
-      background:#fff;
+      border:1px solid rgba(255,255,255,.75);
+      background:rgba(255,255,255,.78);
       font-size:13px;
+      cursor:pointer;
+      transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease, background .12s ease;
+    }
+    .linkbtn:hover{
+      transform: translateY(-1px);
+      box-shadow: 0 12px 18px rgba(17,24,39,.10);
     }
     .linkbtn.primary{
-      border-color:rgba(199,70,52,.35);
-      background:rgba(199,70,52,.08);
+      border-color: rgba(123,45,109,.20);
+      background: linear-gradient(180deg, rgba(123,45,109,.14), rgba(247,182,200,.24));
+      color:#2a1030;
     }
 
     .foot{
       margin-top:16px;
       padding:14px 16px;
-      border:1px solid var(--line);
+      border:1px solid rgba(255,255,255,.65);
       border-radius:22px;
-      background:#fff;
-      color:var(--muted);
+      background:rgba(255,255,255,.70);
+      color:rgba(107,114,128,.98);
       font-size:12px;
-      line-height:1.5;
+      line-height:1.6;
       box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
     }
 
     .small{
       font-size:12px;
-      color:var(--muted);
+      color:rgba(107,114,128,.98);
+    }
+
+    /* ===== Mobile polish ===== */
+    @media (max-width: 640px){
+      .wrap{ padding:16px 12px 52px; }
+
+      .topbar{
+        top: 10px;
+        padding: 12px;
+        border-radius: 18px;
+        gap: 10px;
+        flex-wrap: wrap;
+        align-items: stretch;
+      }
+
+      .brand{
+        min-width: 0;
+        flex: 1 1 100%;
+        gap: 10px;
+      }
+
+      .logo-wrap{ width: 86px; height: 40px; border-radius: 14px; }
+      .oracle-logo{ width: 68px; }
+
+      .topbar > div:last-child{
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
+
+      .btn{
+        width: 100%;
+        justify-content: center;
+        padding: 12px 12px;
+        white-space: normal;
+      }
+
+      .hero{
+        padding: 16px 14px;
+        border-radius: 18px;
+      }
+      .hero h1{ font-size: 20px; }
+      .hero p{ font-size: 13px; }
+
+      .panel{ border-radius: 18px; }
+      .panel:before{ border-radius: 18px; }
+      .panel .hd{ padding: 12px 12px; }
+      .panel .bd{ padding: 12px 12px; }
+
+      input[type="search"], select{ font-size: 15px; }
+
+      .cards{ grid-template-columns: 1fr; }
+
+      .actions{
+        flex-direction: column;
+        gap: 10px;
+      }
+      .linkbtn{
+        width: 100%;
+        padding: 12px 12px;
+      }
+
+      .foot{ border-radius: 18px; }
+    }
+
+    @media (max-width: 380px){
+      .topbar > div:last-child{ grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -262,10 +525,12 @@
     <!-- Topbar -->
     <div class="topbar">
       <div class="brand">
-        <img
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0_Ewwc9ko9cTJIHNNq0PQfBXmYVj6Wa3pnQ&s"
-          alt="Oracle"
-        />
+        <div class="logo-wrap" aria-label="Oracle">
+          <img class="oracle-logo"
+               src="https://upload.wikimedia.org/wikipedia/commons/5/50/Oracle_logo.svg"
+               alt="Oracle">
+        </div>
+
         <div class="title">
           <strong>Oracle Argentina · Beneficios</strong>
           <span>Demo</span>
@@ -280,7 +545,7 @@
 
     <!-- Hero -->
     <section class="hero">
-      <h1>Benefits Hub</h1>
+      <h1><span class="grad">Benefits Hub</span></h1>
       <p>
         Un único lugar para encontrar beneficios, accesos y condiciones.
         Ideal para centralizar links dispersos (SharePoint, partners, códigos, campañas).
@@ -290,7 +555,7 @@
         <div class="chip" data-cat="salud">❤️ Salud</div>
         <div class="chip" data-cat="bienestar">🧠 Bienestar</div>
         <div class="chip" data-cat="retail">🛍️ Compras</div>
-        <div class="chip" data-cat="telco">📱 Movistar</div>
+        <div class="chip" data-cat="telco">📱 Teleco</div>
         <div class="chip" data-cat="programas">🎟️ Programas</div>
       </div>
     </section>
@@ -316,7 +581,7 @@
               <option value="salud">Salud</option>
               <option value="bienestar">Bienestar</option>
               <option value="retail">Compras</option>
-              <option value="Movistarm</option>
+              <option value="telco">Teleco</option>
               <option value="programas">Programas</option>
             </select>
           </div>
@@ -337,16 +602,16 @@
         <div class="bd">
           <div class="cards" id="cards">
 
-            <!-- SharePoint general (placeholder) -->
             <article class="card" data-cat="programas">
               <div class="row">
                 <div>
                   <h3>✨ Hub de Beneficios (SharePoint)</h3>
                   <p>Acceso central a documentación y materiales de beneficios internos.</p>
                 </div>
-                <span class="tag red">Interno</span>
+                <span class="badge top">🔥 Top</span>
               </div>
               <div class="tags">
+                <span class="tag red">Interno</span>
                 <span class="tag">Documentación</span>
                 <span class="tag">Bookmarks</span>
               </div>
@@ -356,14 +621,13 @@
               </div>
             </article>
 
-            <!-- OSDE -->
             <article class="card" data-cat="salud">
               <div class="row">
                 <div>
                   <h3>❤️ OSDE</h3>
                   <p>Acceso a información del beneficio de cobertura médica (material en SharePoint).</p>
                 </div>
-                <span class="tag">Salud</span>
+                <span class="badge new">✨ Nuevo</span>
               </div>
               <div class="tags">
                 <span class="tag">Cobertura</span>
@@ -375,7 +639,6 @@
               </div>
             </article>
 
-            <!-- EAP -->
             <article class="card" data-cat="bienestar">
               <div class="row">
                 <div>
@@ -394,7 +657,6 @@
               </div>
             </article>
 
-            <!-- Bodegas Peñaflor -->
             <article class="card" data-cat="retail">
               <div class="row">
                 <div>
@@ -412,7 +674,6 @@
               </div>
             </article>
 
-            <!-- Club Unilever -->
             <article class="card" data-cat="retail">
               <div class="row">
                 <div>
@@ -430,14 +691,13 @@
               </div>
             </article>
 
-            <!-- Movistar -->
             <article class="card" data-cat="telco">
               <div class="row">
                 <div>
                   <h3>📱 Movistar</h3>
                   <p>Ingresá con el <strong>código 307</strong> para acceder a la oferta para empleados.</p>
                 </div>
-                <span class="tag">Telecom</span>
+                <span class="tag">Teleco</span>
               </div>
               <div class="tags">
                 <span class="tag red">Código: 307</span>
@@ -449,7 +709,6 @@
               </div>
             </article>
 
-            <!-- Samshop -->
             <article class="card" data-cat="retail">
               <div class="row">
                 <div>
@@ -467,7 +726,6 @@
               </div>
             </article>
 
-            <!-- Andromaco -->
             <article class="card" data-cat="retail">
               <div class="row">
                 <div>
@@ -495,9 +753,7 @@
       <strong>Contacto</strong><br/>
       Si necesitás ayuda o querés sugerir un beneficio nuevo, escribí a
       <a href="mailto:camilo.eguiazabal@oracle.com"><strong>camilo.eguiazabal@oracle.com</strong></a>
-      o por Slack <strong>@ceguiaza</strong>.<br/><br/>
-      <span class="small">
-      </span>
+      o por Slack <strong>@ceguiaza</strong>.
     </div>
 
   </div>
@@ -526,7 +782,12 @@
     }
 
     q.addEventListener("input", applyFilters);
-    cat.addEventListener("change", () => { chipCat = "all"; chips.forEach(x=>x.classList.remove("active")); chips[0].classList.add("active"); applyFilters(); });
+    cat.addEventListener("change", () => {
+      chipCat = "all";
+      chips.forEach(x=>x.classList.remove("active"));
+      chips[0].classList.add("active");
+      applyFilters();
+    });
 
     chips.forEach(ch => {
       ch.addEventListener("click", () => {
