@@ -59,14 +59,6 @@
       width:auto;
       display:block;
     }
-    .brand-title{
-      color:#fff;
-      font-size:14px;
-      white-space:nowrap;
-      overflow:hidden;
-      text-overflow:ellipsis;
-      max-width:46vw;
-    }
     .header-actions{
       display:flex;
       gap:8px;
@@ -175,6 +167,7 @@
         url("https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&q=80");
       background-size:cover;
       background-position:center;
+      filter: saturate(.9) contrast(.98);
     }
     .featured-content{
       position:relative;
@@ -410,7 +403,7 @@
     .stars{
       letter-spacing:1px;
       font-size:12px;
-      color:#f59e0b; /* amber-ish */
+      color:#f59e0b;
     }
     .reviewbtn{
       padding:8px 10px;
@@ -574,7 +567,6 @@
     }
     @media(max-width:640px){
       .wrap{ padding:14px 12px; }
-      .brand-title{ display:none; } /* header one-line */
       .btn{ padding:8px 10px; font-size:13px; }
       .featured-actions{ flex-direction:column; }
       .featured-actions .btn{ width:100%; }
@@ -597,7 +589,6 @@
           src="https://upload.wikimedia.org/wikipedia/commons/5/50/Oracle_logo.svg"
           alt="Oracle"
         />
-        <span class="brand-title"
       </div>
 
       <div class="header-actions">
@@ -633,7 +624,7 @@
 
       <!-- ================= DESTACADO DEL MES ================= -->
       <aside class="featured-card" id="destacado">
-        <div class="featured-bg"></div>
+        <div class="featured-bg" aria-hidden="true"></div>
 
         <div class="featured-content">
           <div class="featured-badge">⭐ Destacado del mes</div>
@@ -779,10 +770,14 @@
               <h3>🩺 Médico in company</h3>
               <span class="pill top">Destacado</span>
             </div>
-            <p>Atención médica y nutricional para acompañarte en tu bienestar.</p>
+            <p>
+              ¿Sabías que contamos con atención en oficina?
+              Tenés <strong>nutricionista</strong> y <strong>médico clínico</strong> disponibles para consultas.
+            </p>
             <div class="tags">
               <span class="tag">🍎 Nutricionista</span>
               <span class="tag">🩺 Médico clínico</span>
+              <span class="tag red">Mar/Jue 13:00–15:00</span>
             </div>
 
             <div class="reviewbar" data-reviewbar="medico-in-company">
@@ -1071,19 +1066,14 @@
     const rateButtons = document.getElementById("rateButtons");
 
     let currentBenefitId = null;
-    let currentBenefitTitle = null;
     let currentRate = 0;
 
     const LS_KEY = "benefits_reviews_v1";
 
     function loadAllReviews(){
-      try{
-        return JSON.parse(localStorage.getItem(LS_KEY) || "{}");
-      }catch{
-        return {};
-      }
+      try{ return JSON.parse(localStorage.getItem(LS_KEY) || "{}"); }
+      catch{ return {}; }
     }
-
     function saveAllReviews(obj){
       localStorage.setItem(LS_KEY, JSON.stringify(obj));
     }
@@ -1143,12 +1133,14 @@
       });
     }
 
-    function openReviewModal(benefitId, benefitTitle){
+    function openReviewModal(benefitId){
       currentBenefitId = benefitId;
-      currentBenefitTitle = benefitTitle;
       currentRate = 0;
       reviewText.value = "";
-      reviewBenefitName.textContent = benefitTitle || benefitId;
+
+      const card = document.querySelector(`.card[data-id="${benefitId}"]`);
+      const title = card ? (card.querySelector("h3")?.textContent || benefitId) : benefitId;
+      reviewBenefitName.textContent = title;
 
       rateButtons.querySelectorAll("button").forEach(b=>b.classList.remove("active"));
 
@@ -1159,7 +1151,6 @@
     function closeReviewModal(){
       modal.style.display = "none";
       currentBenefitId = null;
-      currentBenefitTitle = null;
       currentRate = 0;
       reviewText.value = "";
     }
@@ -1183,11 +1174,7 @@
       const txt = (reviewText.value || "").trim();
       const all = loadAllReviews();
       const list = all[currentBenefitId] || [];
-      list.push({
-        rate: currentRate,
-        text: txt,
-        ts: Date.now()
-      });
+      list.push({ rate: currentRate, text: txt, ts: Date.now() });
       all[currentBenefitId] = list;
       saveAllReviews(all);
 
@@ -1197,21 +1184,13 @@
     });
 
     [reviewClose, reviewCancel].forEach(b=> b.addEventListener("click", closeReviewModal));
-    modal.addEventListener("click", (e)=>{
-      if(e.target === modal) closeReviewModal();
-    });
-    document.addEventListener("keydown", (e)=>{
-      if(e.key === "Escape" && modal.style.display === "flex") closeReviewModal();
-    });
+    modal.addEventListener("click", (e)=>{ if(e.target === modal) closeReviewModal(); });
+    document.addEventListener("keydown", (e)=>{ if(e.key === "Escape" && modal.style.display === "flex") closeReviewModal(); });
 
-    // Delegation: abrir modal desde cualquier card
     document.addEventListener("click", (e)=>{
       const btn = e.target.closest("[data-review]");
       if(!btn) return;
-      const id = btn.getAttribute("data-review");
-      const card = document.querySelector(`.card[data-id="${id}"]`);
-      const title = card ? (card.querySelector("h3")?.textContent || id) : id;
-      openReviewModal(id, title);
+      openReviewModal(btn.getAttribute("data-review"));
     });
 
     // Initial render
