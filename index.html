@@ -7,378 +7,309 @@
 
   <style>
     :root{
-      /* Oracle-like palette */
-      --oracle-red:#C74634;
-      --oracle-red-dark:#B33D2E;
-
-      --carbon:#2B2B2B;
-      --ink:#0B0B0B;
-      --muted:#5B5B5B;
-
-      --bg:#F5F5F5;
-      --card:#FFFFFF;
-      --line:#E6E6E6;
-
-      --shadow: 0 10px 22px rgba(0,0,0,.08);
-
-      --max:1180px;
-
-      /* Fonts: Oracle if present, otherwise safe fallbacks */
-      --oracle-sans: "Oracle Sans", "OracleSans", "Oracle Sans UI", "Oracle Sans UI Text",
-                     "Helvetica Neue", Helvetica, Arial, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-      --oracle-serif: "Oracle Serif", "OracleSerif", "Oracle Serif Display",
-                      "Georgia", "Times New Roman", Times, serif;
-
-      --r: 18px;
+      --oracle-red:#c74634;
+      --bg:#f6f7f9;
+      --text:#111827;
+      --muted:#6b7280;
+      --line:#e7e7ea;
+      --radius:18px;
+      --shadow: 0 14px 34px rgba(17,24,39,.12);
+      --shadow2: 0 10px 18px rgba(17,24,39,.08);
+      --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
     }
 
     *{ box-sizing:border-box; }
-    html,body{ height:100%; }
+    html, body{ height:100%; }
     body{
       margin:0;
-      font-family: var(--oracle-sans);
-      color: var(--ink);
+      font-family:var(--font);
+      color:var(--text);
       background: var(--bg);
     }
 
     a{ color:inherit; text-decoration:none; }
     a:hover{ text-decoration:underline; }
 
-    /* ===== Header (always one line: logo + 2 buttons) ===== */
-    header{
+    /* ================= HEADER (ONE LINE ALWAYS) ================= */
+    .site-header{
       position:sticky;
       top:0;
-      z-index:50;
-      background: var(--carbon);
-      color:#fff;
-      border-bottom:1px solid rgba(255,255,255,.08);
+      z-index:10;
+      background:#1f1f1f;
+      box-shadow: 0 10px 20px rgba(0,0,0,.18);
     }
-
-    .top{
-      max-width: var(--max);
+    .header-inner{
+      max-width:1200px;
       margin:0 auto;
-      padding: 12px 16px;
+      padding:10px 14px;
       display:flex;
       align-items:center;
       justify-content:space-between;
       gap:12px;
+      flex-wrap:nowrap;
     }
-
     .brand{
       display:flex;
       align-items:center;
-      gap:12px;
-      min-width: 0;
-      flex: 1 1 auto;
+      gap:10px;
+      min-width:0;
     }
     .oracle-logo{
-      height: 24px;
+      height:20px;
       width:auto;
       display:block;
-      flex: 0 0 auto;
     }
-    .brand-meta{
-      display:flex;
-      flex-direction:column;
-      line-height:1.12;
-      min-width: 0;
-    }
-    .brand-meta strong{
-      font-size:13px;
-      font-weight:700;
-      letter-spacing:.2px;
+    .brand-title{
+      color:#fff;
+      font-size:14px;
       white-space:nowrap;
       overflow:hidden;
       text-overflow:ellipsis;
-      max-width: 44vw;
+      max-width:46vw;
     }
-    .brand-meta span{
-      font-size:12px;
-      color: rgba(255,255,255,.72);
-      white-space:nowrap;
-      overflow:hidden;
-      text-overflow:ellipsis;
-      max-width: 44vw;
-    }
-
-    .actions{
+    .header-actions{
       display:flex;
-      gap:10px;
-      flex-wrap:nowrap;           /* IMPORTANT: no wrap */
-      justify-content:flex-end;
+      gap:8px;
+      flex-wrap:nowrap;
       align-items:center;
-      flex: 0 0 auto;
+      justify-content:flex-end;
     }
 
+    /* ================= BUTTONS ================= */
     .btn{
       display:inline-flex;
       align-items:center;
       justify-content:center;
       gap:8px;
-      padding: 10px 14px;
-      border-radius: 999px;       /* pill */
-      border: 1px solid rgba(255,255,255,.22);
-      background: rgba(255,255,255,.06);
-      color:#fff;
-      font-size:13px;
+      padding:9px 14px;
+      border-radius:999px;
+      font-size:14px;
+      border:1px solid transparent;
       cursor:pointer;
-      transition: transform .12s ease, background .12s ease, border-color .12s ease;
+      text-decoration:none;
       white-space:nowrap;
-      line-height: 1;
+      transition: transform .12s ease, box-shadow .12s ease, background .12s ease, border-color .12s ease, filter .12s ease;
+      user-select:none;
     }
-    .btn:hover{ transform: translateY(-1px); background: rgba(255,255,255,.12); }
-    .btn.primary{
-      background: var(--oracle-red);
-      border-color: var(--oracle-red);
-    }
-    .btn.primary:hover{
-      background: var(--oracle-red-dark);
-      border-color: var(--oracle-red-dark);
-    }
+    .btn:hover{ transform: translateY(-1px); box-shadow: 0 12px 18px rgba(17,24,39,.10); }
+    .btn.primary{ background:var(--oracle-red); color:#fff; border-color:var(--oracle-red); }
+    .btn.primary:hover{ filter:brightness(.96); }
+    .btn.ghost{ background:#fff; color:#111; border-color:#e5e7eb; }
+    .btn.ghost:hover{ background:#fafafa; }
 
-    /* ===== Page container ===== */
-    .wrap{
-      max-width: var(--max);
-      margin:0 auto;
-      padding: 16px 16px 56px;
-    }
+    /* ================= WRAP ================= */
+    .wrap{ max-width:1200px; margin:0 auto; padding:16px; }
 
-    /* ===== Hero ===== */
+    /* ================= HERO ================= */
     .hero{
-      background: #fff;
-      border:1px solid var(--line);
-      border-radius: var(--r);
-      overflow:hidden;
-      box-shadow: var(--shadow);
       display:grid;
       grid-template-columns: 1fr;
-    }
-    @media(min-width: 980px){
-      .hero{ grid-template-columns: 1.15fr .85fr; }
+      gap:16px;
+      margin-top:16px;
     }
 
-    .hero-left{
-      padding: 22px 18px 18px;
-      background:
-        linear-gradient(135deg, rgba(199,70,52,.10), transparent 55%),
-        linear-gradient(180deg, #fff, #fff);
+    .hero-main{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      padding:16px;
+      box-shadow: var(--shadow2);
     }
 
     .kicker{
       font-size:12px;
-      font-weight:700;
-      letter-spacing:.12em;
-      text-transform: uppercase;
-      color: var(--oracle-red);
+      color:var(--oracle-red);
+      font-weight:800;
+      letter-spacing:.10em;
     }
-
     .hero h1{
-      margin: 10px 0 0;
-      font-family: var(--oracle-serif);
-      font-weight: 500;
-      font-size: 30px;
-      line-height:1.12;
-      letter-spacing:-.2px;
-      color:#111;
+      margin:8px 0 6px;
+      font-size:26px;
+      letter-spacing:-.3px;
     }
-
     .hero p{
-      margin: 12px 0 0;
-      color: var(--muted);
-      font-size: 14px;
-      line-height:1.6;
-      max-width: 72ch;
-    }
-
-    .hero-right{
-      padding: 18px;
-      background: #FAFAFA;
-      border-top:1px solid var(--line);
-    }
-    @media(min-width:980px){
-      .hero-right{ border-top:none; border-left:1px solid var(--line); }
-    }
-
-    .quick{
-      display:flex;
-      flex-direction:column;
-      gap:10px;
-    }
-    .quick h3{
       margin:0;
-      font-size:14px;
-      font-weight:700;
-      color:#111;
-      letter-spacing:.2px;
+      color:var(--muted);
+      line-height:1.55;
     }
-    .quick p{
-      margin:0;
-      font-size:13px;
-      color: var(--muted);
-      line-height:1.5;
-    }
-    .quick .row{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      margin-top:6px;
-    }
-    .cta{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:8px;
-      padding: 10px 14px;
-      border-radius: 12px;
-      border:1px solid var(--line);
-      background:#fff;
-      font-size:13px;
-      cursor:pointer;
-      transition: transform .12s ease, border-color .12s ease, background .12s ease;
-      white-space:nowrap;
-    }
-    .cta:hover{ transform:translateY(-1px); border-color:#D6D6D6; background:#FCFCFC; }
-    .cta.primary{
-      border-color: var(--oracle-red);
-      background: var(--oracle-red);
-      color:#fff;
-    }
-    .cta.primary:hover{ background: var(--oracle-red-dark); border-color: var(--oracle-red-dark); }
 
-    /* Chips (keep emojis) */
     .chips{
       display:flex;
       flex-wrap:wrap;
-      gap:10px;
-      margin-top:16px;
+      gap:8px;
+      margin-top:12px;
     }
     .chip{
-      appearance:none;
-      border:1px solid var(--line);
+      border:1px solid #ddd;
       background:#fff;
-      color:#111;
       padding:8px 12px;
       border-radius:999px;
-      font-size:13px;
       cursor:pointer;
-      transition: transform .12s ease, border-color .12s ease, background .12s ease;
+      font-size:14px;
+      transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease, background .12s ease;
     }
-    .chip:hover{ transform:translateY(-1px); border-color:#D6D6D6; }
+    .chip:hover{
+      transform: translateY(-1px);
+      box-shadow: 0 10px 14px rgba(17,24,39,.08);
+    }
     .chip.active{
-      border-color: var(--oracle-red);
-      background: rgba(199,70,52,.10);
-    }
-    .chip:focus{
-      outline:none;
-      box-shadow:0 0 0 4px rgba(199,70,52,.16);
+      background:#fdecec;
+      border-color: rgba(199,70,52,.35);
     }
 
-    /* ===== Layout ===== */
-    .grid{
-      margin-top: 14px;
-      display:grid;
-      grid-template-columns: 1fr;
-      gap:14px;
-    }
-    @media(min-width:980px){
-      .grid{ grid-template-columns: 340px 1fr; }
-    }
-
-    .panel{
+    /* ================= DESTACADO DEL MES ================= */
+    .featured-card{
+      position:relative;
+      border-radius:var(--radius);
+      overflow:hidden;
       background:#fff;
       border:1px solid var(--line);
-      border-radius: var(--r);
-      box-shadow: var(--shadow);
-      overflow:hidden;
+      box-shadow: var(--shadow2);
+      min-height: 210px;
     }
-    .panel .hd{
-      padding: 14px 16px;
-      border-bottom: 1px solid var(--line);
+    .featured-bg{
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(180deg,rgba(255,255,255,.95),rgba(255,255,255,.88)),
+        url("https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&q=80");
+      background-size:cover;
+      background-position:center;
+    }
+    .featured-content{
+      position:relative;
+      padding:18px;
+    }
+    .featured-badge{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      background:rgba(199,70,52,.12);
+      color:#8f2b20;
+      border:1px solid rgba(199,70,52,.25);
+      border-radius:999px;
+      padding:6px 10px;
+      font-weight:800;
+      font-size:12px;
+    }
+    .featured-content h3{ margin:10px 0 6px; font-size:18px; }
+    .featured-content p{ margin:0; color:var(--muted); line-height:1.5; }
+    .featured-actions{ display:flex; gap:10px; flex-wrap:wrap; margin-top:14px; }
+    .featured-hint{ margin-top:10px; color:rgba(107,114,128,.95); font-size:12px; }
+
+    /* ================= GRID ================= */
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:16px;
+      margin-top:18px;
+    }
+    .panel{
+      background:#fff;
+      padding:16px;
+      border-radius:var(--radius);
+      border:1px solid var(--line);
+      box-shadow: var(--shadow2);
+    }
+    .panel-head{
       display:flex;
       align-items:center;
       justify-content:space-between;
       gap:10px;
+      margin-bottom:10px;
     }
-    .panel .hd h2{
-      margin:0;
-      font-size:14px;
-      font-weight:700;
-      letter-spacing:.2px;
-    }
-    .panel .bd{ padding: 14px 16px; }
-
-    label{ display:block; font-size:12px; color:var(--muted); margin-bottom:6px; }
-    .field{ margin-bottom:12px; }
-
+    .panel h2{ margin:0 0 10px; }
+    label{ display:block; margin-top:10px; font-size:12px; color:var(--muted); }
     input[type="search"], select{
       width:100%;
-      padding:12px 12px;
-      border-radius: 12px;
-      border:1px solid var(--line);
+      padding:12px;
+      border-radius:12px;
+      border:1px solid #e5e7eb;
+      font-size:16px;
+      margin-top:6px;
       outline:none;
-      font-size:16px; /* better mobile */
-      background:#fff;
       transition: box-shadow .12s ease, border-color .12s ease;
+      background:#fff;
     }
     input[type="search"]:focus, select:focus{
-      border-color: rgba(199,70,52,.7);
-      box-shadow: 0 0 0 4px rgba(199,70,52,.15);
+      border-color: rgba(199,70,52,.35);
+      box-shadow: 0 0 0 5px rgba(199,70,52,.10);
     }
-    .hint{
+    .hint{ margin-top:10px; color:var(--muted); font-size:12px; line-height:1.4; }
+    .panel-link{
       font-size:12px;
-      color: var(--muted);
-      line-height:1.45;
-      margin-top: 8px;
+      color:var(--oracle-red);
+      text-decoration:none;
+      white-space:nowrap;
     }
+    .panel-link:hover{ text-decoration:underline; }
 
-    /* ===== Cards ===== */
+    /* ================= CARDS ================= */
     .cards{
       display:grid;
       grid-template-columns: 1fr;
       gap:12px;
     }
-    @media(min-width:760px){
+    @media(min-width:740px){
       .cards{ grid-template-columns: 1fr 1fr; }
     }
 
     .card{
-      border:1px solid var(--line);
-      border-radius: 16px;
-      background:#fff;
-      box-shadow: 0 8px 16px rgba(0,0,0,.06);
+      position:relative;
+      border:1px solid rgba(255,255,255,.70);
+      border-radius:20px;
+      background: rgba(255,255,255,.86);
+      box-shadow: var(--shadow2);
       padding:14px 14px 12px;
       display:flex;
       flex-direction:column;
       gap:10px;
       min-height: 170px;
+      overflow:hidden;
       transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease;
+      backdrop-filter: blur(10px);
     }
     .card:hover{
       transform: translateY(-2px);
-      box-shadow: 0 14px 26px rgba(0,0,0,.10);
-      border-color:#DADADA;
+      box-shadow: 0 18px 30px rgba(17,24,39,.12);
+      border-color: rgba(199,70,52,.20);
     }
 
-    .card .row{
+    .card:before{
+      content:"";
+      position:absolute;
+      left:0; top:0;
+      width:100%;
+      height:7px;
+      background: linear-gradient(90deg, rgba(199,70,52,.75), rgba(255,214,201,.95));
+    }
+    .card[data-cat="salud"]:before{ background: linear-gradient(90deg, rgba(255,99,132,.55), rgba(255,214,201,.90)); }
+    .card[data-cat="bienestar"]:before{ background: linear-gradient(90deg, rgba(147,197,253,.55), rgba(199,70,52,.18)); }
+    .card[data-cat="retail"]:before{ background: linear-gradient(90deg, rgba(167,243,208,.60), rgba(255,214,201,.90)); }
+    .card[data-cat="telco"]:before{ background: linear-gradient(90deg, rgba(196,181,253,.65), rgba(199,70,52,.18)); }
+    .card[data-cat="programas"]:before{ background: linear-gradient(90deg, rgba(251,191,36,.65), rgba(255,214,201,.90)); }
+    .card[data-cat="universidades"]:before{ background: linear-gradient(90deg, rgba(34,197,94,.35), rgba(255,214,201,.90)); }
+
+    .card-top{
       display:flex;
       align-items:flex-start;
       justify-content:space-between;
       gap:10px;
+      padding-top:2px;
     }
     .card h3{
       margin:0;
       font-size:15px;
-      font-weight:700;
       line-height:1.25;
+      letter-spacing:-.1px;
     }
     .card p{
       margin:0;
       font-size:13px;
-      color: var(--muted);
-      line-height:1.5;
+      color:rgba(107,114,128,.98);
+      line-height:1.48;
     }
 
-    /* ===== Softer tags + softer actions (the part you disliked) ===== */
     .tags{
       display:flex;
       flex-wrap:wrap;
@@ -386,44 +317,47 @@
     }
     .tag{
       font-size:12px;
-      padding:6px 10px;
+      padding:6px 9px;
       border-radius:999px;
-      border:1px solid rgba(0,0,0,.06); /* softer than --line */
-      background: rgba(0,0,0,.03);       /* subtle */
-      color:#2b2b2b;
+      border:1px solid rgba(17,24,39,.06);
+      color:rgba(107,114,128,.98);
+      background:rgba(17,24,39,.03);
     }
     .tag.red{
       border-color: rgba(199,70,52,.22);
-      background: rgba(199,70,52,.08);
-      color: #8f2b20;
-      font-weight:700;
+      color: rgba(199,70,52,.95);
+      background: rgba(199,70,52,.10);
+      font-weight:800;
     }
 
-    .badge{
+    .pill{
       display:inline-flex;
       align-items:center;
+      gap:6px;
       font-size:11px;
       padding:6px 10px;
       border-radius:999px;
-      border:1px solid rgba(0,0,0,.06);
-      background: rgba(0,0,0,.03);
+      border:1px solid rgba(255,255,255,.8);
+      background:rgba(255,255,255,.78);
+      color:#111;
+      box-shadow: 0 10px 14px rgba(17,24,39,.08);
       white-space:nowrap;
-      color:#222;
+      height: fit-content;
     }
-    .badge.top{
-      border-color: rgba(199,70,52,.22);
-      background: rgba(199,70,52,.08);
-      color: var(--oracle-red);
-      font-weight:700;
+    .pill.top{
+      background: linear-gradient(180deg, rgba(255,214,201,.70), rgba(199,70,52,.10));
+      border-color: rgba(199,70,52,.18);
+      color: rgba(199,70,52,.95);
+      font-weight:900;
     }
-    .badge.new{
-      border-color: rgba(16,185,129,.20);
-      background: rgba(16,185,129,.08);
-      color:#065F46;
-      font-weight:700;
+    .pill.new{
+      background: linear-gradient(180deg, rgba(167,243,208,.45), rgba(255,255,255,.76));
+      border-color: rgba(16,185,129,.22);
+      color:#064e3b;
+      font-weight:900;
     }
 
-    .actions-row{
+    .actions{
       margin-top:auto;
       display:flex;
       gap:10px;
@@ -435,45 +369,187 @@
       justify-content:center;
       gap:8px;
       padding:10px 12px;
-      border-radius: 999px;                 /* softer pill */
-      border:1px solid rgba(0,0,0,.08);     /* softer border */
-      background: rgba(255,255,255,.92);    /* slightly softer than pure white */
+      border-radius:14px;
+      border:1px solid rgba(17,24,39,.08);
+      background:rgba(255,255,255,.9);
       font-size:13px;
       cursor:pointer;
-      transition: transform .12s ease, border-color .12s ease, background .12s ease, box-shadow .12s ease;
-      box-shadow: 0 6px 12px rgba(0,0,0,.04); /* subtle */
+      transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease, background .12s ease;
+      text-decoration:none;
     }
     .linkbtn:hover{
       transform: translateY(-1px);
-      border-color: rgba(0,0,0,.12);
-      background: #fff;
-      box-shadow: 0 10px 18px rgba(0,0,0,.06);
+      box-shadow: 0 12px 18px rgba(17,24,39,.10);
     }
     .linkbtn.primary{
-      border-color: rgba(199,70,52,.26);
-      background: rgba(199,70,52,.10); /* softer primary */
-      color: #8f2b20;
-      font-weight:700;
-      box-shadow: none;
-    }
-    .linkbtn.primary:hover{
-      background: rgba(199,70,52,.14);
-      border-color: rgba(199,70,52,.32);
+      border-color: rgba(199,70,52,.20);
+      background: linear-gradient(180deg, rgba(199,70,52,.14), rgba(255,214,201,.24));
+      color:#2a1030;
+      font-weight:800;
     }
 
-    .foot{
-      margin-top:16px;
-      padding: 14px 16px;
-      border:1px solid var(--line);
-      border-radius: var(--r);
-      background:#fff;
-      box-shadow: var(--shadow);
-      color: var(--muted);
+    /* ====== RESEÑAS ====== */
+    .reviewbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      padding:10px 10px 8px;
+      border:1px solid rgba(17,24,39,.06);
+      background:rgba(17,24,39,.02);
+      border-radius:14px;
+    }
+    .reviewstats{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      flex-wrap:wrap;
+      color:rgba(107,114,128,.98);
       font-size:12px;
-      line-height:1.6;
+    }
+    .stars{
+      letter-spacing:1px;
+      font-size:12px;
+      color:#f59e0b; /* amber-ish */
+    }
+    .reviewbtn{
+      padding:8px 10px;
+      border-radius:12px;
+      border:1px solid rgba(17,24,39,.10);
+      background:#fff;
+      cursor:pointer;
+      font-size:12px;
+      white-space:nowrap;
+    }
+    .reviewbtn:hover{ box-shadow: 0 10px 14px rgba(17,24,39,.08); transform: translateY(-1px); }
+
+    .reviewlist{
+      margin:0;
+      padding:0;
+      list-style:none;
+      display:grid;
+      gap:8px;
+    }
+    .reviewitem{
+      border:1px solid rgba(17,24,39,.06);
+      background:rgba(255,255,255,.9);
+      border-radius:14px;
+      padding:10px;
+    }
+    .reviewitem .meta{
+      display:flex;
+      justify-content:space-between;
+      gap:8px;
+      color:rgba(107,114,128,.98);
+      font-size:12px;
+      margin-bottom:6px;
+    }
+    .reviewitem .txt{
+      font-size:13px;
+      color:rgba(55,65,81,.98);
+      line-height:1.45;
+      margin:0;
     }
 
-    /* Toast */
+    /* ===== Modal reseñas ===== */
+    .modal-backdrop{
+      position:fixed;
+      inset:0;
+      background: rgba(0,0,0,.40);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:16px;
+      z-index:9998;
+    }
+    .modal{
+      width:min(520px, 100%);
+      background:#fff;
+      border-radius:18px;
+      border:1px solid rgba(17,24,39,.10);
+      box-shadow: 0 22px 60px rgba(0,0,0,.25);
+      overflow:hidden;
+    }
+    .modal-hd{
+      padding:14px 16px;
+      border-bottom:1px solid rgba(17,24,39,.08);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+    }
+    .modal-hd strong{ font-size:14px; }
+    .modal-close{
+      border:1px solid rgba(17,24,39,.12);
+      background:#fff;
+      border-radius:12px;
+      padding:8px 10px;
+      cursor:pointer;
+    }
+    .modal-bd{ padding:14px 16px; display:grid; gap:12px; }
+    .rate{
+      display:flex; gap:8px; flex-wrap:wrap; align-items:center;
+    }
+    .rate button{
+      width:40px; height:40px;
+      border-radius:12px;
+      border:1px solid rgba(17,24,39,.12);
+      background:#fff;
+      cursor:pointer;
+      font-size:16px;
+    }
+    .rate button.active{
+      border-color: rgba(199,70,52,.30);
+      box-shadow: 0 0 0 5px rgba(199,70,52,.10);
+    }
+    textarea{
+      width:100%;
+      min-height:88px;
+      resize:vertical;
+      border-radius:14px;
+      border:1px solid rgba(17,24,39,.12);
+      padding:12px;
+      font-family:inherit;
+      font-size:14px;
+      outline:none;
+    }
+    textarea:focus{
+      border-color: rgba(199,70,52,.35);
+      box-shadow: 0 0 0 5px rgba(199,70,52,.10);
+    }
+    .modal-ft{
+      padding:14px 16px;
+      border-top:1px solid rgba(17,24,39,.08);
+      display:flex;
+      gap:10px;
+      justify-content:flex-end;
+      flex-wrap:wrap;
+    }
+
+    /* ================= SECTION DIVIDER ================= */
+    .section-divider{
+      grid-column: 1 / -1;
+      border:1px dashed rgba(17,24,39,.14);
+      border-radius:14px;
+      padding:12px 14px;
+      background:rgba(255,255,255,.9);
+    }
+    .section-divider h2{ margin:0; font-size:16px; }
+    .section-divider p{ margin:6px 0 0; color:var(--muted); font-size:13px; }
+
+    /* ================= FOOTER ================= */
+    .footer{
+      margin:24px 0 10px;
+      font-size:13px;
+      color:var(--muted);
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      padding:14px 16px;
+      box-shadow: var(--shadow2);
+    }
+
+    /* ================= TOAST ================= */
     #toast{
       position:fixed;
       left:50%;
@@ -483,349 +559,467 @@
       border-radius:999px;
       background:#111;
       color:#fff;
-      border:1px solid rgba(255,255,255,.12);
-      box-shadow: 0 14px 34px rgba(0,0,0,.22);
+      box-shadow: 0 14px 30px rgba(0,0,0,.18);
       font-size:13px;
       display:none;
-      z-index:9999;
       max-width: calc(100vw - 24px);
       text-align:center;
+      z-index:9999;
     }
 
-    /* ===== Mobile: keep header in ONE line always ===== */
-    @media (max-width: 760px){
-      .wrap{ padding: 12px 12px 52px; }
-
-      .top{
-        padding: 10px 12px;
-        gap:10px;
-      }
-
-      /* Hide meta on mobile to keep one line */
-      .brand-meta{ display:none; }
-
-      .oracle-logo{ height: 20px; }
-
-      /* Buttons compact, never wrap */
-      .actions{
-        gap:8px;
-        flex-wrap:nowrap;
-      }
-      .btn{
-        padding: 9px 12px;
-        font-size: 13px;
-      }
-      .btn.primary{ min-width: 122px; }
-      .btn{ min-width: 96px; }
-
-      /* Hero */
-      .hero-left{ padding: 18px 14px 14px; }
-      .hero-right{ padding: 14px; }
-      .hero h1{ font-size: 24px; }
-
-      /* Panels */
-      .panel .hd{ padding: 12px 12px; }
-      .panel .bd{ padding: 12px 12px; }
-
-      /* Cards */
-      .cards{ grid-template-columns: 1fr; }
-      .actions-row{
-        flex-direction: row;    /* keep buttons side-by-side when possible */
-        flex-wrap: wrap;
-      }
-      .linkbtn{
-        border-radius: 14px;    /* less extreme on mobile */
-        box-shadow: none;       /* cleaner */
-      }
+    /* ================= RESPONSIVE ================= */
+    @media(min-width:900px){
+      .hero{ grid-template-columns: 2fr 1fr; }
+      .grid{ grid-template-columns: 320px 1fr; }
     }
-
-    /* Ultra small: still one line header (shrink button text slightly) */
-    @media (max-width: 380px){
-      .btn{ padding: 8px 10px; font-size: 12.5px; }
-      .btn.primary{ min-width: 112px; }
-      .btn{ min-width: 88px; }
+    @media(max-width:640px){
+      .wrap{ padding:14px 12px; }
+      .brand-title{ display:none; } /* header one-line */
+      .btn{ padding:8px 10px; font-size:13px; }
+      .featured-actions{ flex-direction:column; }
+      .featured-actions .btn{ width:100%; }
+      .actions{ flex-direction:column; gap:10px; }
+      .linkbtn{ width:100%; }
+      .reviewbar{ flex-direction:column; align-items:flex-start; }
+      .reviewbtn{ width:100%; }
     }
-
-    button, a { -webkit-tap-highlight-color: transparent; }
   </style>
 </head>
 
 <body>
-  <header>
-    <div class="top">
+
+  <!-- ================= HEADER ================= -->
+  <header class="site-header">
+    <div class="header-inner">
       <div class="brand">
-        <img class="oracle-logo"
-             src="https://upload.wikimedia.org/wikipedia/commons/5/50/Oracle_logo.svg"
-             alt="Oracle">
-        <div class="brand-meta">
-          <strong>Oracle Argentina · Beneficios</strong>
-          <span>Demo</span>
-        </div>
+        <img
+          class="oracle-logo"
+          src="https://upload.wikimedia.org/wikipedia/commons/5/50/Oracle_logo.svg"
+          alt="Oracle"
+        />
+        <span class="brand-title">Oracle · Beneficios</span>
       </div>
 
-      <div class="actions">
-        <a class="btn primary" href="#beneficios">Ver beneficios</a>
-        <a class="btn" href="#contacto">Contacto</a>
+      <div class="header-actions">
+        <a href="#beneficios" class="btn primary">Ver beneficios</a>
+        <a href="#contacto" class="btn ghost">Contacto</a>
       </div>
     </div>
   </header>
 
-  <div class="wrap">
-    <section class="hero" aria-label="Hero">
-      <div class="hero-left">
-        <div class="kicker">ORACLE · BENEFITS HUB</div>
-        <h1><span>✨ Your Benefits Hub</span></h1>
-        <p>Encontrá beneficios internos y externos en un solo lugar. Usá el buscador o filtrá por categoría.</p>
+  <!-- ================= MAIN ================= -->
+  <main class="wrap">
 
-        <div class="chips" aria-label="Categorías rápidas">
-          <button class="chip active" data-cat="all" type="button" aria-pressed="true">✨ Todos</button>
-          <button class="chip" data-cat="salud" type="button" aria-pressed="false">❤️ Salud</button>
-          <button class="chip" data-cat="bienestar" type="button" aria-pressed="false">🧠 Bienestar</button>
-          <button class="chip" data-cat="retail" type="button" aria-pressed="false">🛍️ Compras</button>
-          <button class="chip" data-cat="telco" type="button" aria-pressed="false">📱 Movistar</button>
-          <button class="chip" data-cat="programas" type="button" aria-pressed="false">🎟️ Programas</button>
+    <!-- ================= HERO ================= -->
+    <section class="hero">
+      <div class="hero-main">
+        <span class="kicker">ORACLE · BENEFITS HUB</span>
+        <h1>✨ Your Benefits Hub</h1>
+        <p>
+          Encontrá beneficios internos y externos en un solo lugar.
+          Usá el buscador o filtrá por categoría.
+        </p>
+
+        <div class="chips">
+          <button class="chip active" data-cat="all" type="button">✨ Todos</button>
+          <button class="chip" data-cat="salud" type="button">❤️ Salud</button>
+          <button class="chip" data-cat="bienestar" type="button">🧠 Bienestar</button>
+          <button class="chip" data-cat="retail" type="button">🛍️ Compras</button>
+          <button class="chip" data-cat="telco" type="button">📱 Movistar</button>
+          <button class="chip" data-cat="programas" type="button">🎟️ Programas</button>
+          <button class="chip" data-cat="universidades" type="button">🎓 Universidades</button>
         </div>
       </div>
 
-      <aside class="hero-right">
-        <div class="quick">
-          <h3>📌 Acceso rápido</h3>
-          <p>Entrá a los recursos más usados o pedí ayuda al equipo.</p>
-          <div class="row">
-            <a class="cta primary" href="#beneficios">Ver beneficios</a>
-            <a class="cta" href="#contacto">Contacto</a>
+      <!-- ================= DESTACADO DEL MES ================= -->
+      <aside class="featured-card" id="destacado">
+        <div class="featured-bg"></div>
+
+        <div class="featured-content">
+          <div class="featured-badge">⭐ Destacado del mes</div>
+          <h3>🎓 Convenios con Universidades</h3>
+          <p>
+            Accedé rápido a los convenios y documentación de
+            <strong>UADE, UCEMA, UDESA y Siglo 21</strong>.
+          </p>
+
+          <div class="featured-actions">
+            <a href="#universidades" class="btn primary">Ver universidades</a>
+            <a href="#" class="btn ghost" onclick="showToast('Pegá acá el link a la carpeta SharePoint ✅'); return false;">Abrir carpeta</a>
           </div>
+
+          <div class="featured-hint">Tip: revisá requisitos y vigencia en cada PDF.</div>
         </div>
       </aside>
     </section>
 
-    <div class="grid">
-      <aside class="panel" aria-label="Filtros">
-        <div class="hd">
-          <h2>🔎 Buscar y filtrar</h2>
-          <span style="font-size:12px;color:var(--muted);">Demo</span>
-        </div>
-        <div class="bd">
-          <div class="field">
-            <label for="q">Buscador</label>
-            <input id="q" type="search" placeholder="Buscá por OSDE, EAP, Wellhub, Movistar, etc." />
-          </div>
+    <!-- ================= GRID ================= -->
+    <section class="grid">
 
-          <div class="field">
-            <label for="cat">Categoría</label>
-            <select id="cat" aria-label="Categoría">
-              <option value="all">Todas</option>
-              <option value="salud">Salud</option>
-              <option value="bienestar">Bienestar</option>
-              <option value="retail">Compras</option>
-              <option value="telco">Teleco</option>
-              <option value="programas">Programas</option>
-            </select>
-          </div>
+      <!-- ===== FILTROS ===== -->
+      <aside class="panel">
+        <h2>🔎 Buscar y filtrar</h2>
 
-          <div class="hint">Tip: buscá por proveedor (OSDE), programa (EAP/Wellhub) o por código (307 / ORACLE).</div>
+        <label for="q">Buscador</label>
+        <input id="q" type="search" placeholder="Buscá por OSDE, EAP, UADE, Movistar, etc." />
+
+        <label for="cat">Categoría</label>
+        <select id="cat">
+          <option value="all">Todas</option>
+          <option value="salud">Salud</option>
+          <option value="bienestar">Bienestar</option>
+          <option value="retail">Compras</option>
+          <option value="telco">Teleco</option>
+          <option value="programas">Programas</option>
+          <option value="universidades">Universidades</option>
+        </select>
+
+        <div class="hint">
+          👉 Consejo: si buscás “UADE” o “UDESA” te lleva directo a los convenios.
         </div>
       </aside>
 
-      <main class="panel" id="beneficios" aria-label="Beneficios">
-        <div class="hd">
+      <!-- ===== BENEFICIOS ===== -->
+      <section class="panel" id="beneficios">
+        <div class="panel-head">
           <h2>📌 Beneficios disponibles</h2>
-          <span style="font-size:12px;color:var(--muted);">Actualizado: demo</span>
+          <a class="panel-link" href="#destacado">Ir al destacado ⭐</a>
         </div>
 
-        <div class="bd">
-          <div class="cards" id="cards">
+        <div class="cards" id="cards">
 
-            <article class="card" data-cat="programas">
-              <div class="row">
-                <div>
-                  <h3>✨ Hub de Beneficios (SharePoint)</h3>
-                  <p>Acceso central a documentación y materiales de beneficios internos.</p>
-                </div>
-                <span class="badge top">🔥 Top</span>
-              </div>
-              <div class="tags">
-                <span class="tag red">Interno</span>
-                <span class="tag">Documentación</span>
-                <span class="tag">Bookmarks</span>
-              </div>
-              <div class="actions-row">
-                <a class="linkbtn primary" href="#" onclick="alert('Reemplazá este link por tu SharePoint real.')">Abrir</a>
-                <a class="linkbtn" href="#" onclick="alert('Acá podés linkear una guía o FAQ interna.')">Guía / FAQ</a>
-              </div>
-            </article>
+          <!-- ============ PROGRAMAS ============ -->
+          <article class="card" data-cat="programas" data-id="hub-beneficios">
+            <div class="card-top">
+              <h3>✨ Hub de Beneficios</h3>
+              <span class="pill top">Top</span>
+            </div>
+            <p>Acceso central a documentación interna.</p>
+            <div class="tags">
+              <span class="tag red">Interno</span>
+              <span class="tag">Documentación</span>
+              <span class="tag">Bookmarks</span>
+            </div>
 
-            <article class="card" data-cat="salud">
-              <div class="row">
-                <div>
-                  <h3>❤️ OSDE</h3>
-                  <p>Acceso a información del beneficio de cobertura médica (material interno).</p>
-                </div>
-                <span class="badge new">✨ Nuevo</span>
+            <div class="reviewbar" data-reviewbar="hub-beneficios">
+              <div class="reviewstats">
+                <span class="stars" data-stars></span>
+                <span data-summary>Sin reseñas todavía</span>
               </div>
-              <div class="tags">
-                <span class="tag">Cobertura</span>
-                <span class="tag">Altas / bajas</span>
-              </div>
-              <div class="actions-row">
-                <a class="linkbtn primary" href="#" onclick="alert('Pegá acá el link real de OSDE en SharePoint.')">Ver info</a>
-                <a class="linkbtn" href="#contacto">Necesito ayuda</a>
-              </div>
-            </article>
+              <button class="reviewbtn" type="button" data-review="hub-beneficios">⭐ Dejar reseña</button>
+            </div>
 
-            <article class="card" data-cat="bienestar">
-              <div class="row">
-                <div>
-                  <h3>🧠 Programa de Asistencia al Empleado (EAP)</h3>
-                  <p>Soporte y asistencia para colaboradores (acceso externo).</p>
-                </div>
-                <span class="badge">Bienestar</span>
-              </div>
-              <div class="tags">
-                <span class="tag">Asistencia</span>
-                <span class="tag">Confidencial</span>
-              </div>
-              <div class="actions-row">
-                <a class="linkbtn primary" href="https://oracle.one.telushealth.com" target="_blank" rel="noopener">Acceder ↗</a>
-                <a class="linkbtn" href="#contacto">Consultas</a>
-              </div>
-            </article>
+            <ul class="reviewlist" data-reviewlist="hub-beneficios"></ul>
 
-            <article class="card" data-cat="bienestar">
-              <div class="row">
-                <div>
-                  <h3>🏋️ Wellhub (ex Gympass)</h3>
-                  <p>Plataforma de bienestar corporativo con suscripción: acceso a opciones de fitness y apps (mindfulness, nutrición, sueño y más), según elegibilidad.</p>
-                </div>
-                <span class="badge">Plataforma</span>
-              </div>
-              <div class="tags">
-                <span class="tag">Fitness</span>
-                <span class="tag">Mindfulness</span>
-                <span class="tag">Sueño</span>
-              </div>
-              <div class="actions-row">
-                <a class="linkbtn primary" href="https://wellhub.com/es-ar/" target="_blank" rel="noopener">Ir a Wellhub ↗</a>
-                <a class="linkbtn" href="https://helpcenter.gympass.com/en-us/articles/how-does-gympass-work" target="_blank" rel="noopener">Cómo funciona ↗</a>
-              </div>
-            </article>
+            <div class="actions">
+              <a class="linkbtn primary" href="#" onclick="showToast('Reemplazá este link por tu Hub real ✅'); return false;">Abrir</a>
+              <a class="linkbtn" href="#" onclick="showToast('Pegá acá tu Guía/FAQ ✅'); return false;">Guía / FAQ</a>
+            </div>
+          </article>
 
-            <article class="card" data-cat="retail">
-              <div class="row">
-                <div>
-                  <h3>🍷 Bodegas Peñaflor</h3>
-                  <p>Beneficios y descuentos en compras (acceso externo).</p>
-                </div>
-                <span class="badge">Compras</span>
-              </div>
-              <div class="tags">
-                <span class="tag">Descuentos</span>
-                <span class="tag">E-commerce</span>
-              </div>
-              <div class="actions-row">
-                <a class="linkbtn primary" href="https://vi.grupo-penaflor.com.ar" target="_blank" rel="noopener">Ir al sitio ↗</a>
-              </div>
-            </article>
+          <!-- ============ SALUD ============ -->
+          <article class="card" data-cat="salud" data-id="osde">
+            <div class="card-top">
+              <h3>❤️ OSDE</h3>
+              <span class="pill new">Nuevo</span>
+            </div>
+            <p>Información de cobertura médica (altas/bajas y pasos clave).</p>
+            <div class="tags">
+              <span class="tag">Cobertura</span>
+              <span class="tag">Altas / bajas</span>
+            </div>
 
-            <article class="card" data-cat="retail">
-              <div class="row">
-                <div>
-                  <h3>🛒 Club de Beneficios Unilever</h3>
-                  <p>Descuentos y beneficios en productos seleccionados.</p>
-                </div>
-                <span class="badge">Ahorro</span>
+            <div class="reviewbar" data-reviewbar="osde">
+              <div class="reviewstats">
+                <span class="stars" data-stars></span>
+                <span data-summary>Sin reseñas todavía</span>
               </div>
-              <div class="tags">
-                <span class="tag">Productos</span>
-                <span class="tag">Ahorro</span>
-              </div>
-              <div class="actions-row">
-                <a class="linkbtn primary" href="https://clubdebeneficios.com" target="_blank" rel="noopener">Ir al sitio ↗</a>
-              </div>
-            </article>
+              <button class="reviewbtn" type="button" data-review="osde">⭐ Dejar reseña</button>
+            </div>
 
-            <article class="card" data-cat="telco">
-              <div class="row">
-                <div>
-                  <h3>📱 Movistar</h3>
-                  <p>Ingresá con el <strong>código 307</strong> para acceder a la oferta para empleados.</p>
-                </div>
-                <span class="badge">Teleco</span>
-              </div>
-              <div class="tags">
-                <span class="tag red">Código: 307</span>
-                <span class="tag">Ofertas</span>
-              </div>
-              <div class="actions-row">
-                <a class="linkbtn primary" href="https://ofertas.movistar.com.ar" target="_blank" rel="noopener">Ver ofertas ↗</a>
-                <button class="linkbtn" type="button" data-copy="307">Copiar código</button>
-              </div>
-            </article>
+            <ul class="reviewlist" data-reviewlist="osde"></ul>
 
-            <article class="card" data-cat="retail">
-              <div class="row">
-                <div>
-                  <h3>🛍️ Samshop (Samsung)</h3>
-                  <p>Beneficios exclusivos para empleados en productos Samsung.</p>
-                </div>
-                <span class="badge">Electrónica</span>
-              </div>
-              <div class="tags">
-                <span class="tag">Electrónica</span>
-                <span class="tag">Descuentos</span>
-              </div>
-              <div class="actions-row">
-                <a class="linkbtn primary" href="https://www.samshop.com" target="_blank" rel="noopener">Ir a Samshop ↗</a>
-              </div>
-            </article>
+            <div class="actions">
+              <a class="linkbtn primary" href="#" onclick="showToast('Pegá acá el link de OSDE ✅'); return false;">Ver info</a>
+              <a class="linkbtn" href="#contacto">Pedir ayuda</a>
+            </div>
+          </article>
 
-            <article class="card" data-cat="retail">
-              <div class="row">
-                <div>
-                  <h3>🧴 Tienda Andrómaco</h3>
-                  <p>Beneficio con código de descuento para Oracle.</p>
-                </div>
-                <span class="badge">Cuidado personal</span>
-              </div>
-              <div class="tags">
-                <span class="tag">Cuidado personal</span>
-                <span class="tag red">Código: ORACLE</span>
-              </div>
-              <div class="actions-row">
-                <a class="linkbtn primary" href="https://tienda.andromaco.com" target="_blank" rel="noopener">Ir a la tienda ↗</a>
-                <button class="linkbtn" type="button" data-copy="ORACLE">Copiar código</button>
-              </div>
-            </article>
+          <!-- ============ BIENESTAR ============ -->
+          <article class="card" data-cat="bienestar" data-id="eap">
+            <div class="card-top">
+              <h3>🧠 EAP</h3>
+              <span class="pill">Bienestar</span>
+            </div>
+            <p>Programa de asistencia al empleado. Soporte confidencial.</p>
+            <div class="tags">
+              <span class="tag">Asistencia</span>
+              <span class="tag">Confidencial</span>
+            </div>
 
+            <div class="reviewbar" data-reviewbar="eap">
+              <div class="reviewstats">
+                <span class="stars" data-stars></span>
+                <span data-summary>Sin reseñas todavía</span>
+              </div>
+              <button class="reviewbtn" type="button" data-review="eap">⭐ Dejar reseña</button>
+            </div>
+
+            <ul class="reviewlist" data-reviewlist="eap"></ul>
+
+            <div class="actions">
+              <a class="linkbtn primary" href="https://oracle.one.telushealth.com" target="_blank" rel="noopener">Acceder</a>
+              <a class="linkbtn" href="#contacto">Consultas</a>
+            </div>
+          </article>
+
+          <!-- ============ SALUD: MEDICO IN COMPANY ============ -->
+          <article class="card" data-cat="salud" data-id="medico-in-company">
+            <div class="card-top">
+              <h3>🩺 Médico in company</h3>
+              <span class="pill top">Destacado</span>
+            </div>
+            <p>Atención médica y nutricional para acompañarte en tu bienestar.</p>
+            <div class="tags">
+              <span class="tag">🍎 Nutricionista</span>
+              <span class="tag">🩺 Médico clínico</span>
+            </div>
+
+            <div class="reviewbar" data-reviewbar="medico-in-company">
+              <div class="reviewstats">
+                <span class="stars" data-stars></span>
+                <span data-summary>Sin reseñas todavía</span>
+              </div>
+              <button class="reviewbtn" type="button" data-review="medico-in-company">⭐ Dejar reseña</button>
+            </div>
+
+            <ul class="reviewlist" data-reviewlist="medico-in-company"></ul>
+
+            <div class="actions">
+              <a class="linkbtn primary" href="#" onclick="showToast('Pegá acá el PDF/imagen con la info ✅'); return false;">Ver info</a>
+              <a class="linkbtn" href="#contacto">Pedir ayuda</a>
+            </div>
+          </article>
+
+          <!-- ============ TELECO ============ -->
+          <article class="card" data-cat="telco" data-id="movistar">
+            <div class="card-top">
+              <h3>📱 Movistar</h3>
+              <span class="pill">Teleco</span>
+            </div>
+            <p>Usá el <strong>código 307</strong> para la oferta para empleados.</p>
+            <div class="tags">
+              <span class="tag red">Código: 307</span>
+              <span class="tag">Ofertas</span>
+            </div>
+
+            <div class="reviewbar" data-reviewbar="movistar">
+              <div class="reviewstats">
+                <span class="stars" data-stars></span>
+                <span data-summary>Sin reseñas todavía</span>
+              </div>
+              <button class="reviewbtn" type="button" data-review="movistar">⭐ Dejar reseña</button>
+            </div>
+
+            <ul class="reviewlist" data-reviewlist="movistar"></ul>
+
+            <div class="actions">
+              <a class="linkbtn primary" href="https://ofertas.movistar.com.ar" target="_blank" rel="noopener">Ver ofertas</a>
+              <button class="linkbtn" type="button" data-copy="307">Copiar código</button>
+            </div>
+          </article>
+
+          <!-- ================= UNIVERSIDADES ================= -->
+          <div class="section-divider" id="universidades">
+            <h2>🎓 Universidades</h2>
+            <p>Accedé a convenios y PDFs por institución (carpeta “UNIVERSIDADES”).</p>
+          </div>
+
+          <article class="card" data-cat="universidades" data-id="uade">
+            <div class="card-top">
+              <h3>🎓 UADE</h3>
+              <span class="pill">Convenio</span>
+            </div>
+            <p>Documentación y condiciones del convenio UADE (PDF).</p>
+            <div class="tags">
+              <span class="tag">Universidad</span>
+              <span class="tag">PDF</span>
+            </div>
+
+            <div class="reviewbar" data-reviewbar="uade">
+              <div class="reviewstats">
+                <span class="stars" data-stars></span>
+                <span data-summary>Sin reseñas todavía</span>
+              </div>
+              <button class="reviewbtn" type="button" data-review="uade">⭐ Dejar reseña</button>
+            </div>
+
+            <ul class="reviewlist" data-reviewlist="uade"></ul>
+
+            <div class="actions">
+              <a class="linkbtn primary" href="#" onclick="showToast('Pegá acá el link del PDF UADE ✅'); return false;">Ver PDF</a>
+              <a class="linkbtn" href="#" onclick="showToast('Pegá acá el link de la carpeta UADE ✅'); return false;">Abrir carpeta</a>
+            </div>
+          </article>
+
+          <article class="card" data-cat="universidades" data-id="ucema">
+            <div class="card-top">
+              <h3>🎓 UCEMA</h3>
+              <span class="pill">Convenio</span>
+            </div>
+            <p>Condiciones y pasos para aplicar al convenio UCEMA (PDF).</p>
+            <div class="tags">
+              <span class="tag">Universidad</span>
+              <span class="tag">PDF</span>
+            </div>
+
+            <div class="reviewbar" data-reviewbar="ucema">
+              <div class="reviewstats">
+                <span class="stars" data-stars></span>
+                <span data-summary>Sin reseñas todavía</span>
+              </div>
+              <button class="reviewbtn" type="button" data-review="ucema">⭐ Dejar reseña</button>
+            </div>
+
+            <ul class="reviewlist" data-reviewlist="ucema"></ul>
+
+            <div class="actions">
+              <a class="linkbtn primary" href="#" onclick="showToast('Pegá acá el link del PDF UCEMA ✅'); return false;">Ver PDF</a>
+              <a class="linkbtn" href="#" onclick="showToast('Pegá acá el link de la carpeta UCEMA ✅'); return false;">Abrir carpeta</a>
+            </div>
+          </article>
+
+          <article class="card" data-cat="universidades" data-id="udesa">
+            <div class="card-top">
+              <h3>🎓 UDESA</h3>
+              <span class="pill">Convenio</span>
+            </div>
+            <p>Acceso a documentación del convenio UDESA (PDF).</p>
+            <div class="tags">
+              <span class="tag">Universidad</span>
+              <span class="tag">PDF</span>
+            </div>
+
+            <div class="reviewbar" data-reviewbar="udesa">
+              <div class="reviewstats">
+                <span class="stars" data-stars></span>
+                <span data-summary>Sin reseñas todavía</span>
+              </div>
+              <button class="reviewbtn" type="button" data-review="udesa">⭐ Dejar reseña</button>
+            </div>
+
+            <ul class="reviewlist" data-reviewlist="udesa"></ul>
+
+            <div class="actions">
+              <a class="linkbtn primary" href="#" onclick="showToast('Pegá acá el link del PDF UDESA ✅'); return false;">Ver PDF</a>
+              <a class="linkbtn" href="#" onclick="showToast('Pegá acá el link de la carpeta UDESA ✅'); return false;">Abrir carpeta</a>
+            </div>
+          </article>
+
+          <article class="card" data-cat="universidades" data-id="siglo21">
+            <div class="card-top">
+              <h3>🎓 Siglo 21</h3>
+              <span class="pill">Convenio</span>
+            </div>
+            <p>Condiciones del convenio Siglo 21 (PDF).</p>
+            <div class="tags">
+              <span class="tag">Universidad</span>
+              <span class="tag">PDF</span>
+            </div>
+
+            <div class="reviewbar" data-reviewbar="siglo21">
+              <div class="reviewstats">
+                <span class="stars" data-stars></span>
+                <span data-summary>Sin reseñas todavía</span>
+              </div>
+              <button class="reviewbtn" type="button" data-review="siglo21">⭐ Dejar reseña</button>
+            </div>
+
+            <ul class="reviewlist" data-reviewlist="siglo21"></ul>
+
+            <div class="actions">
+              <a class="linkbtn primary" href="#" onclick="showToast('Pegá acá el link del PDF Siglo 21 ✅'); return false;">Ver PDF</a>
+              <a class="linkbtn" href="#" onclick="showToast('Pegá acá el link de la carpeta Siglo 21 ✅'); return false;">Abrir carpeta</a>
+            </div>
+          </article>
+
+        </div>
+      </section>
+    </section>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="footer" id="contacto">
+      <strong>Contacto</strong><br/>
+      Si necesitás ayuda o querés sugerir un beneficio nuevo, escribí a
+      <a href="mailto:camilo.eguiazabal@oracle.com"><strong>camilo.eguiazabal@oracle.com</strong></a>
+      o por Slack <strong>@ceguiaza</strong>.
+    </footer>
+
+  </main>
+
+  <!-- ================= TOAST ================= -->
+  <div id="toast" role="status" aria-live="polite"></div>
+
+  <!-- ================= MODAL RESEÑAS ================= -->
+  <div class="modal-backdrop" id="reviewModal">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="reviewTitle">
+      <div class="modal-hd">
+        <strong id="reviewTitle">⭐ Dejar reseña</strong>
+        <button class="modal-close" type="button" id="reviewClose">Cerrar</button>
+      </div>
+      <div class="modal-bd">
+        <div style="color:var(--muted); font-size:13px;">
+          Beneficio: <strong id="reviewBenefitName">—</strong>
+        </div>
+
+        <div>
+          <div style="font-size:12px; color:var(--muted); margin-bottom:6px;">Tu puntaje</div>
+          <div class="rate" id="rateButtons">
+            <button type="button" data-rate="1">1</button>
+            <button type="button" data-rate="2">2</button>
+            <button type="button" data-rate="3">3</button>
+            <button type="button" data-rate="4">4</button>
+            <button type="button" data-rate="5">5</button>
           </div>
         </div>
-      </main>
-    </div>
 
-    <div class="foot" id="contacto">
-      <strong style="color:#111;">Contacto</strong><br/>
-      Si necesitás ayuda o querés sugerir un beneficio nuevo, escribí a
-      <a href="mailto:camilo.eguiazabal@oracle.com"><strong style="color:#111;">camilo.eguiazabal@oracle.com</strong></a>
-      o por Slack <strong style="color:#111;">@ceguiaza</strong>.
+        <div>
+          <div style="font-size:12px; color:var(--muted); margin-bottom:6px;">Comentario (opcional)</div>
+          <textarea id="reviewText" maxlength="180" placeholder="Contá tu experiencia (máx. 180 caracteres)"></textarea>
+          <div style="font-size:12px; color:rgba(107,114,128,.95); margin-top:6px;">
+            Tip: contá si fue fácil usarlo, qué te costó o qué mejorarías.
+          </div>
+        </div>
+      </div>
+      <div class="modal-ft">
+        <button class="btn ghost" type="button" id="reviewCancel">Cancelar</button>
+        <button class="btn primary" type="button" id="reviewSave">Guardar reseña</button>
+      </div>
     </div>
   </div>
 
-  <div id="toast" role="status" aria-live="polite"></div>
-
   <script>
-    // ===== Filtering (synced chip + select) =====
     const q = document.getElementById("q");
     const cat = document.getElementById("cat");
     const chips = Array.from(document.querySelectorAll(".chip"));
-    const getCards = () => Array.from(document.querySelectorAll("#cards .card"));
+    const toast = document.getElementById("toast");
+    const cards = () => Array.from(document.querySelectorAll("#cards .card"));
 
     let chipCat = "all";
+    let toastT;
+
+    function showToast(msg){
+      toast.textContent = msg;
+      toast.style.display = "inline-flex";
+      clearTimeout(toastT);
+      toastT = setTimeout(()=> toast.style.display="none", 1700);
+    }
 
     function applyFilters(){
       const term = (q.value || "").toLowerCase().trim();
-      const effectiveCat = chipCat;
+      const effectiveCat = (chipCat !== "all") ? chipCat : cat.value;
 
-      getCards().forEach(card => {
+      cards().forEach(card => {
         const c = card.getAttribute("data-cat") || "all";
         const text = (card.textContent || "").toLowerCase();
         const matchText = !term || text.includes(term);
@@ -834,46 +1028,195 @@
       });
     }
 
-    function setActiveChip(value){
-      chipCat = value || "all";
-      cat.value = chipCat;
-
-      chips.forEach(x=>{
-        const is = (x.getAttribute("data-cat") || "all") === chipCat;
-        x.classList.toggle("active", is);
-        x.setAttribute("aria-pressed", is ? "true" : "false");
-      });
-
-      applyFilters();
-    }
-
     q.addEventListener("input", applyFilters);
-    cat.addEventListener("change", () => setActiveChip(cat.value));
-    chips.forEach(ch => ch.addEventListener("click", () => setActiveChip(ch.getAttribute("data-cat") || "all")));
-    setActiveChip("all");
 
-    // ===== Toast + copy =====
-    const toast = document.getElementById("toast");
-    let toastT;
+    cat.addEventListener("change", () => {
+      chipCat = "all";
+      chips.forEach(x=>x.classList.remove("active"));
+      chips[0].classList.add("active");
+      applyFilters();
+    });
 
-    function showToast(msg){
-      toast.textContent = msg;
-      toast.style.display = "inline-flex";
-      clearTimeout(toastT);
-      toastT = setTimeout(()=> toast.style.display="none", 1800);
-    }
+    chips.forEach(ch => {
+      ch.addEventListener("click", () => {
+        chips.forEach(x=>x.classList.remove("active"));
+        ch.classList.add("active");
+        chipCat = ch.getAttribute("data-cat") || "all";
+        cat.value = "all";
+        applyFilters();
+      });
+    });
 
     document.addEventListener("click", async (e)=>{
-      const btn = e.target.closest("[data-copy]");
-      if(!btn) return;
-      const val = btn.getAttribute("data-copy");
-      try{
-        await navigator.clipboard.writeText(val);
-        showToast(`Código ${val} copiado ✅`);
-      }catch{
-        showToast("No pude copiar. Copialo manualmente.");
+      const b = e.target.closest("[data-copy]");
+      if(b){
+        const val = b.getAttribute("data-copy");
+        try{
+          await navigator.clipboard.writeText(val);
+          showToast(`Código ${val} copiado ✅`);
+        }catch{
+          showToast("No pude copiar. Copialo manualmente.");
+        }
+        return;
       }
     });
+
+    // ===================== Reseñas (LocalStorage) =====================
+    const modal = document.getElementById("reviewModal");
+    const reviewClose = document.getElementById("reviewClose");
+    const reviewCancel = document.getElementById("reviewCancel");
+    const reviewSave = document.getElementById("reviewSave");
+    const reviewText = document.getElementById("reviewText");
+    const reviewBenefitName = document.getElementById("reviewBenefitName");
+    const rateButtons = document.getElementById("rateButtons");
+
+    let currentBenefitId = null;
+    let currentBenefitTitle = null;
+    let currentRate = 0;
+
+    const LS_KEY = "benefits_reviews_v1";
+
+    function loadAllReviews(){
+      try{
+        return JSON.parse(localStorage.getItem(LS_KEY) || "{}");
+      }catch{
+        return {};
+      }
+    }
+
+    function saveAllReviews(obj){
+      localStorage.setItem(LS_KEY, JSON.stringify(obj));
+    }
+
+    function formatStars(avg){
+      const a = Math.round(avg * 10) / 10;
+      const full = Math.floor(a);
+      const half = (a - full) >= 0.5 ? 1 : 0;
+      let s = "★".repeat(full) + (half ? "☆" : "");
+      if(!s) s = "—";
+      return s;
+    }
+
+    function renderBenefitReviews(benefitId){
+      const all = loadAllReviews();
+      const list = all[benefitId] || [];
+
+      const card = document.querySelector(`.card[data-id="${benefitId}"]`);
+      if(!card) return;
+
+      const bar = card.querySelector(`[data-reviewbar="${benefitId}"]`);
+      const summary = bar.querySelector("[data-summary]");
+      const starsEl = bar.querySelector("[data-stars]");
+      const ul = card.querySelector(`[data-reviewlist="${benefitId}"]`);
+
+      if(list.length === 0){
+        summary.textContent = "Sin reseñas todavía";
+        starsEl.textContent = "";
+        ul.innerHTML = "";
+        return;
+      }
+
+      const avg = list.reduce((a,r)=>a + (r.rate||0), 0) / list.length;
+      starsEl.textContent = formatStars(avg);
+      summary.textContent = `${(Math.round(avg*10)/10).toFixed(1)} · ${list.length} reseña(s)`;
+
+      const last = list.slice(-3).reverse();
+      ul.innerHTML = last.map(r=>{
+        const d = new Date(r.ts);
+        const dd = isNaN(d.getTime()) ? "" : d.toLocaleDateString("es-AR");
+        const safeTxt = (r.text || "").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+        return `
+          <li class="reviewitem">
+            <div class="meta">
+              <span>⭐ ${r.rate}/5</span>
+              <span>${dd}</span>
+            </div>
+            <p class="txt">${safeTxt || "<span style='color:rgba(107,114,128,.95)'>Sin comentario</span>"}</p>
+          </li>
+        `;
+      }).join("");
+    }
+
+    function renderAll(){
+      document.querySelectorAll(".card[data-id]").forEach(card=>{
+        renderBenefitReviews(card.getAttribute("data-id"));
+      });
+    }
+
+    function openReviewModal(benefitId, benefitTitle){
+      currentBenefitId = benefitId;
+      currentBenefitTitle = benefitTitle;
+      currentRate = 0;
+      reviewText.value = "";
+      reviewBenefitName.textContent = benefitTitle || benefitId;
+
+      rateButtons.querySelectorAll("button").forEach(b=>b.classList.remove("active"));
+
+      modal.style.display = "flex";
+      setTimeout(()=> reviewText.focus(), 0);
+    }
+
+    function closeReviewModal(){
+      modal.style.display = "none";
+      currentBenefitId = null;
+      currentBenefitTitle = null;
+      currentRate = 0;
+      reviewText.value = "";
+    }
+
+    rateButtons.addEventListener("click", (e)=>{
+      const btn = e.target.closest("button[data-rate]");
+      if(!btn) return;
+      currentRate = parseInt(btn.getAttribute("data-rate"), 10) || 0;
+      rateButtons.querySelectorAll("button").forEach(b=>b.classList.remove("active"));
+      btn.classList.add("active");
+    });
+
+    reviewSave.addEventListener("click", ()=>{
+      if(!currentBenefitId) return;
+
+      if(!currentRate){
+        showToast("Elegí un puntaje (1 a 5) ⭐");
+        return;
+      }
+
+      const txt = (reviewText.value || "").trim();
+      const all = loadAllReviews();
+      const list = all[currentBenefitId] || [];
+      list.push({
+        rate: currentRate,
+        text: txt,
+        ts: Date.now()
+      });
+      all[currentBenefitId] = list;
+      saveAllReviews(all);
+
+      renderBenefitReviews(currentBenefitId);
+      closeReviewModal();
+      showToast("¡Gracias! Reseña guardada ✅");
+    });
+
+    [reviewClose, reviewCancel].forEach(b=> b.addEventListener("click", closeReviewModal));
+    modal.addEventListener("click", (e)=>{
+      if(e.target === modal) closeReviewModal();
+    });
+    document.addEventListener("keydown", (e)=>{
+      if(e.key === "Escape" && modal.style.display === "flex") closeReviewModal();
+    });
+
+    // Delegation: abrir modal desde cualquier card
+    document.addEventListener("click", (e)=>{
+      const btn = e.target.closest("[data-review]");
+      if(!btn) return;
+      const id = btn.getAttribute("data-review");
+      const card = document.querySelector(`.card[data-id="${id}"]`);
+      const title = card ? (card.querySelector("h3")?.textContent || id) : id;
+      openReviewModal(id, title);
+    });
+
+    // Initial render
+    applyFilters();
+    renderAll();
   </script>
 </body>
 </html>
